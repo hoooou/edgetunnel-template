@@ -16,9 +16,10 @@ The template uses ACL4SSR's full `ProxyGFWlist.list` for `🚀 节点选择` ins
 1. Local/private networks remain direct.
 2. UDP whose destination IP is classified as mainland China goes direct.
 3. All remaining UDP is rejected. This prevents an unsupported EdgeTunnel VLESS UDP flow from falling through to `DIRECT`.
-4. `opencode.ai` goes to the independent `💻 OpenCode` group.
-5. `tech.bitauto.com`, `yiche.com`, `bitauto.com`, and `bitautotech.com` go direct.
-6. No extra `openai.com` rule is added. OpenAI is handled by the upstream `AI.list` and `OpenAi.list` rulesets and the `💬 Ai平台` group.
+4. `ip.me` explicitly goes to `🚀 节点选择`, even when `🐟 漏网之鱼` is configured as direct.
+5. `opencode.ai` goes to the independent `💻 OpenCode` group.
+6. `tech.bitauto.com`, `yiche.com`, `bitauto.com`, and `bitautotech.com` go direct.
+7. No extra `openai.com` rule is added. OpenAI is handled by the upstream `AI.list` and `OpenAi.list` rulesets and the `💬 Ai平台` group.
 
 ## Publish
 
