@@ -7,6 +7,10 @@ Generated: 2026-09-21
 - `clash-base.yaml`: base Clash configuration plus high-priority rules.
 - `ACL4SSR_Online_Mini_Ai_Merged.ini`: ACL4SSR Mini AI template plus the independent `💻 OpenCode` group.
 
+## GFW rule coverage
+
+The template uses ACL4SSR's full `ProxyGFWlist.list` for `🚀 节点选择` instead of the smaller `ProxyLite.list`. Explicit AI rules remain earlier, so OpenAI/Claude-related domains still enter `💬 Ai平台`; other GFW-listed domains such as `huggingface.co` enter `🚀 节点选择`. Domains not matched by any rule still reach `🐟 漏网之鱼`, which can remain set to `🎯 全球直连`.
+
 ## Included policy
 
 1. Local/private networks remain direct.
