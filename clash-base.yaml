@@ -969,6 +969,7 @@ rules:
 
   # User-specific policies. OpenAI is intentionally not duplicated here;
   # it is handled by the upstream AI.list and OpenAi.list rulesets.
+  - 'DOMAIN-SUFFIX,ip.me,🚀 节点选择'
   - 'DOMAIN-SUFFIX,opencode.ai,💻 OpenCode'
   - 'DOMAIN-SUFFIX,tech.bitauto.com,DIRECT'
   - 'DOMAIN-SUFFIX,yiche.com,DIRECT'
