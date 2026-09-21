@@ -45,6 +45,10 @@ XUDP
 Only output node information
 ```
 
+## Note about later duplicate OpenAI rules
+
+The upstream ACL4SSR `ProxyLite.list` also contains some OpenAI domains and sends them to `🚀 节点选择`. The dedicated `AI.list` and `OpenAi.list` rules assigned to `💬 Ai平台` are generated earlier, so Mihomo matches those first. The later ProxyLite duplicates are unreachable for the same OpenAI domains and do not override `💬 Ai平台`. No custom `openai.com` rule is added by this repository.
+
 ## Clash Verge local enhancement cleanup
 
 The current local rules enhancement still contains these two rules:
