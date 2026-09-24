@@ -945,6 +945,8 @@ cfw-bypass:
 #   4. Give OpenCode and company domains explicit policies.
 # =========================================================
 rules:
+  # Block the Microsoft Update Assistant process before any direct/proxy rule.
+  - 'PROCESS-NAME,Microsoft Update Assistant,REJECT'
   # Preserve local/private networks before the catch-all UDP rejection.
   - 'DOMAIN-SUFFIX,internal,DIRECT'
   - 'DOMAIN-SUFFIX,lan,DIRECT'
