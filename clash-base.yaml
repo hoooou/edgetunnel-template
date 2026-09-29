@@ -947,6 +947,8 @@ cfw-bypass:
 rules:
   # Block the Microsoft Update Assistant process before any direct/proxy rule.
   - 'PROCESS-NAME,Microsoft Update Assistant,REJECT'
+  # Keep SSH and any other traffic to this server off the proxy.
+  - 'IP-CIDR,43.128.69.152/32,DIRECT,no-resolve'
   # Preserve local/private networks before the catch-all UDP rejection.
   - 'DOMAIN-SUFFIX,internal,DIRECT'
   - 'DOMAIN-SUFFIX,lan,DIRECT'
