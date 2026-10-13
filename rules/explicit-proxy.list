@@ -1,0 +1,7 @@
+# Additional explicitly proxied exceptions from hoooou/my_yml rule list.
+# Route through 🚀 节点选择, prior to generic ACL4SSR rules.
+DOMAIN-SUFFIX,immersivetranslate.com
+DOMAIN-SUFFIX,smallstrawberry.com
+DOMAIN-SUFFIX,googleapis.cn
+DOMAIN-SUFFIX,live.com
+DOMAIN-SUFFIX,pbs.twimg.com
