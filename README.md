@@ -97,13 +97,13 @@ LAN/private rules intentionally precede them.
 
 ## Phase 2: Mihomo DNS (2026-10-13)
 
-The base profile now enables `dns.enhanced-mode: fake-ip` and split DNS, based on the principles in `hoooou/my_yml` but **without importing its specific office DNS servers**.
+The base profile now enables `dns.enhanced-mode: fake-ip` and split DNS, based on the principles in `hoooou/my_yml` including its **company-only DNS exceptions** for use on the corporate network.
 
 - Default DNS and domestic AI policy use Chinese HTTPS DNS (`dns.alidns.com` and `doh.pub`).
 - Overseas AI domains resolve via HTTPS DNS bound to `💬 Ai平台`. `opencode.ai` resolves via `💻 OpenCode`; these policy keys are explicitly mirrored from `ai-proxy.list` and `ai-direct.list`.
 - Other overseas domains use fallback HTTPS DNS through `🚀 节点选择` when the geo-IP filter selects fallback.
 - Proxy-node hostnames use domestic bootstrap resolvers to prevent a proxy-resolution cycle. Direct-domain resolution uses domestic HTTPS DNS; `direct-nameserver-follow-policy: true` follows explicit AI/company overrides.
-- Office domains (`*.yiche.com`, `*.bitauto.com` and related) bypass fake-IP and use `system` DNS, so the current LAN's DNS applies instead of hard-coding `192.168.70.x` on roaming devices.
+- Office domains (`*.tech.bitauto.com`, `*.yiche.com`, `*.bitauto.com`, `*.bitautotech.com`) bypass fake-IP and are resolved via corporate DNS servers `192.168.70.49` and `192.168.70.1` (as in `hoooou/my_yml`). These names are also explicitly routed `DIRECT`. This requires the company Wi-Fi/LAN or a company VPN with reachability to those DNS servers. Offsite without VPN, these internal sites may fail to resolve, intentionally avoiding the public-DNS result that redirects to a public parent domain.
 - DNS AAAA answers are disabled (`dns.ipv6: false`) to reduce IPv6 direct-route surprises; the pre-existing IPv6 LAN/CIDR rules remain. This is not an absolute leak prevention guarantee.
 - Existing EdgeTunnel UDP rules remain **unchanged**. Overseas DoH uses HTTPS over TCP via an existing proxy group; normal overseas UDP stays rejected.
 
