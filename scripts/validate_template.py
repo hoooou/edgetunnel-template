@@ -47,6 +47,7 @@ def main() -> None:
         "DOMAIN-SUFFIX,lan,DIRECT",
         "NETWORK,UDP,REJECT",
         "DOMAIN-SUFFIX,opencode.ai,💻 OpenCode",
+        "DOMAIN-SUFFIX,yieti.top,DIRECT",
         "DOMAIN-SUFFIX,bitautotech.com,DIRECT",
     ])
     assert "find-process-mode: strict" in BASE
