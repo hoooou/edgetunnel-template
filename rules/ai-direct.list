@@ -24,3 +24,8 @@ DOMAIN-SUFFIX,xinghuo.xfyun.cn
 DOMAIN-SUFFIX,spark-api.xf-yun.com
 DOMAIN-SUFFIX,siliconflow.cn
 DOMAIN-SUFFIX,siliconflow.com
+# Other China-based model providers
+DOMAIN-SUFFIX,baichuan-ai.com
+DOMAIN-SUFFIX,stepfun.com
+DOMAIN-SUFFIX,stepfun.ai
+DOMAIN-SUFFIX,sensenova.cn
