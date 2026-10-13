@@ -163,7 +163,7 @@ dns:
     '+.sensenova.cn':
       - 'https://dns.alidns.com/dns-query'
       - 'https://doh.pub/dns-query'
-    # Overseas AI domains are resolved through HTTPS DNS via the AI policy group.
+    # Overseas AI names resolve via direct encrypted DNS; domain connections still use 💬 Ai平台.
     '+.openai.com':
       - 'https://dns.alidns.com/dns-query'
       - 'https://doh.pub/dns-query'
