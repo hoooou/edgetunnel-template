@@ -1,0 +1,72 @@
+# Overseas AI dedicated sites, APIs and resources -> 💬 Ai平台.
+# Shared auth, telemetry, payment and CDN provider root domains are not forced here.
+# opencode.ai is in clash-base.yaml, ordered ahead of application process rules.
+# OpenAI / ChatGPT / Sora
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,chatgpt.com
+DOMAIN-SUFFIX,oaistatic.com
+DOMAIN-SUFFIX,oaiusercontent.com
+DOMAIN-SUFFIX,oaistatsig.com
+DOMAIN-SUFFIX,openaimerge.com
+DOMAIN-SUFFIX,sora.com
+DOMAIN-SUFFIX,chatgpt.livekit.cloud
+DOMAIN-SUFFIX,openaicom.imgix.net
+DOMAIN-SUFFIX,openaiapi-site.azureedge.net
+DOMAIN,openai-api.arkoselabs.com
+DOMAIN,chat.openai.com.cdn.cloudflare.net
+DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
+DOMAIN,openaicomproductionae4b.blob.core.windows.net
+DOMAIN,production-openaicom-storage.azureedge.net
+# Anthropic / Claude
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,claude.com
+DOMAIN-SUFFIX,claudeusercontent.com
+# Google Gemini / AI Studio / NotebookLM
+DOMAIN,ai.google.dev
+DOMAIN,aistudio.google.com
+DOMAIN,gemini.google.com
+DOMAIN,generativelanguage.googleapis.com
+DOMAIN,aiplatform.googleapis.com
+DOMAIN,proactivebackend-pa.googleapis.com
+DOMAIN,alkalimakersuite-pa.clients6.google.com
+DOMAIN,makersuite.google.com
+DOMAIN-SUFFIX,notebooklm.google.com
+DOMAIN-SUFFIX,notebooklm.google
+DOMAIN-SUFFIX,deepmind.google
+DOMAIN-SUFFIX,generativeai.google
+# Copilot / Azure AI
+DOMAIN-SUFFIX,copilot.microsoft.com
+DOMAIN-SUFFIX,copilot.cloud.microsoft
+DOMAIN,api.githubcopilot.com
+DOMAIN,copilot-proxy.githubusercontent.com
+DOMAIN-SUFFIX,ai.azure.com
+DOMAIN,sydney.bing.com
+# Cursor / JetBrains (multi-model apps: match actual destination)
+DOMAIN-SUFFIX,cursor.com
+DOMAIN-SUFFIX,cursor.sh
+DOMAIN-SUFFIX,cursorapi.com
+DOMAIN-SUFFIX,grazie.ai
+DOMAIN-SUFFIX,grazie.aws.intellij.net
+DOMAIN-SUFFIX,jetbrains.ai
+# Other AI providers / development / generative services
+DOMAIN-SUFFIX,perplexity.ai
+DOMAIN-SUFFIX,pplx.ai
+DOMAIN-SUFFIX,grok.com
+DOMAIN-SUFFIX,x.ai
+DOMAIN-SUFFIX,meta.ai
+DOMAIN-SUFFIX,mistral.ai
+DOMAIN-SUFFIX,groq.com
+DOMAIN-SUFFIX,together.ai
+DOMAIN,api.together.xyz
+DOMAIN-SUFFIX,openrouter.ai
+DOMAIN-SUFFIX,fireworks.ai
+DOMAIN-SUFFIX,huggingface.co
+DOMAIN-SUFFIX,hf.co
+DOMAIN-SUFFIX,replicate.com
+DOMAIN-SUFFIX,fal.ai
+DOMAIN-SUFFIX,midjourney.com
+DOMAIN-SUFFIX,runwayml.com
+DOMAIN-SUFFIX,elevenlabs.io
+DOMAIN-SUFFIX,suno.com
+DOMAIN-SUFFIX,stability.ai
