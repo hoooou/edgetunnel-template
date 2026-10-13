@@ -76,6 +76,12 @@ def main() -> None:
     assert "custom_proxy_group=💻 OpenCode" in INI
     assert "custom_proxy_group=💬 Ai平台" in INI
     assert "custom_proxy_group=🚀 节点选择" in INI
+    # Default proxy/fallback group is 节点选择; proxies must precede DIRECT.
+    assert "custom_proxy_group=🚀 节点选择`select`.*`[]DIRECT" in INI
+    assert "custom_proxy_group=🚀 节点选择`select`[]DIRECT`.*" not in INI
+    for name in ("💬 Ai平台", "💻 OpenCode", "🐟 漏网之鱼"):
+        line = next(l for l in INI.splitlines() if l.startswith(f"custom_proxy_group={name}`"))
+        assert "`select`[]🚀 节点选择" in line, f"Wrong default for {name}"
     assert "♻️ 自动选择" not in INI, "Removed auto-select group must not be referenced"
     assert "`url-test`" not in INI, "Auto-test group must not be generated"
     assert "ruleset=DIRECT,https://raw.githubusercontent.com/hoooou/edgetunnel-template/main/rules/ai-direct.list" in INI
