@@ -76,6 +76,8 @@ def main() -> None:
     assert "custom_proxy_group=💻 OpenCode" in INI
     assert "custom_proxy_group=💬 Ai平台" in INI
     assert "custom_proxy_group=🚀 节点选择" in INI
+    assert "♻️ 自动选择" not in INI, "Removed auto-select group must not be referenced"
+    assert "`url-test`" not in INI, "Auto-test group must not be generated"
     assert "ruleset=DIRECT,https://raw.githubusercontent.com/hoooou/edgetunnel-template/main/rules/ai-direct.list" in INI
 
     direct_domains = entries(DIRECT, "DOMAIN,") + entries(DIRECT, "DOMAIN-SUFFIX,")
