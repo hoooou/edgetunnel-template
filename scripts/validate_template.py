@@ -130,18 +130,20 @@ def main() -> None:
         key = f"+.{domain}" if kind == "DOMAIN-SUFFIX" else domain
         assert f"'{key}':" in BASE, f"Missing DNS policy: {key}"
     assert "'+.opencode.ai':" in BASE
-    # Keep overseas DoH off Cloudflare IP ranges for the Cloudflare Workers tunnel.
-    # Both entries are HTTPS/TCP; this is a source check, not a live connectivity test.
+    # Do not resolve OpenCode through EdgeTunnel: its proxied DoH URLs timed out.
+    # Website traffic stays routed to the OpenCode group by high-priority rules.
     opencode_dns = BASE.split("    '+.opencode.ai':\n", 1)[1].split("    # Domestic AI domains", 1)[0]
-    assert "https://9.9.9.9/dns-query#💻 OpenCode" in opencode_dns
-    assert "https://doh.opendns.com/dns-query#💻 OpenCode" in opencode_dns
+    assert "https://dns.alidns.com/dns-query" in opencode_dns
+    assert "https://doh.pub/dns-query" in opencode_dns
+    assert "#💻 OpenCode" not in opencode_dns
+    assert "#💬 Ai平台" not in opencode_dns
     dns_config = BASE.split("dns:\n", 1)[1].split("  fake-ip-filter:", 1)[0]
     assert "https://1.1.1.1/dns-query#" not in dns_config
     assert "https://8.8.8.8/dns-query#" not in dns_config
     assert "  fallback:\n    - 'https://9.9.9.9/dns-query#🚀 节点选择'\n    - 'https://doh.opendns.com/dns-query#🚀 节点选择'" in BASE
     assert dns_config.count("https://9.9.9.9/dns-query#💬 Ai平台") == len(proxy_domains)
     assert dns_config.count("https://doh.opendns.com/dns-query#💬 Ai平台") == len(proxy_domains)
-    assert "'+.opencode.ai':\n      - 'https://9.9.9.9/dns-query#💻 OpenCode'\n      - 'https://doh.opendns.com/dns-query#💻 OpenCode'" in BASE
+    assert "'+.opencode.ai':\n      - 'https://dns.alidns.com/dns-query'\n      - 'https://doh.pub/dns-query'" in BASE
     assert len(process_names) == 74, f"Unexpected process count: {len(process_names)}"
     print(f"Static checks passed: {len(process_names)} processes, {len(direct_domains)} domestic AI domains, {len(proxy_domains)} overseas AI domains.")
     print("Not verified: live Subconverter expansion, Mihomo runtime, Shadowrocket import, Android process identity and real DNS behavior.")
