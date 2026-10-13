@@ -1,0 +1,12 @@
+# Dedicated overseas AI applications. Multi-model tools (OpenCode/Cursor/Python/Node/browsers) are deliberately excluded.
+PROCESS-NAME,com.openai.chatgpt
+PROCESS-NAME,ChatGPT
+PROCESS-NAME,ChatGPT.exe
+PROCESS-NAME,com.anthropic.claude
+PROCESS-NAME,Claude
+PROCESS-NAME,Claude.exe
+PROCESS-NAME,Claude Helper
+PROCESS-NAME,Claude Helper (GPU)
+PROCESS-NAME,Claude Helper (Plugin)
+PROCESS-NAME,Claude Helper (Renderer)
+PROCESS-NAME,com.google.android.apps.bard
