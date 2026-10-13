@@ -54,7 +54,7 @@ def main() -> None:
     assert "proxy-server-nameserver:" in BASE and "direct-nameserver:" in BASE
     # Corporate split-horizon DNS must never silently switch back to system/public DNS.
     for domain in ("tech.bitauto.com", "yiche.com", "bitauto.com", "bitautotech.com"):
-        dns_entry = "    '+." + domain + "':\\n      - 192.168.70.49\\n      - 192.168.70.1\\n"
+        dns_entry = "    '+." + domain + "':\n      - 192.168.70.49\n      - 192.168.70.1\n"
         assert dns_entry in BASE, f"Wrong corporate DNS policy: {domain}"
         assert f"    - '+.{domain}'" in BASE, f"Missing fake-IP exclusion: {domain}"
         assert f"DOMAIN-SUFFIX,{domain},DIRECT" in BASE, f"Missing direct route: {domain}"
