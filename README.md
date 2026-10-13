@@ -11,6 +11,11 @@ Generated: 2026-09-21
 - `rules/app-direct.list`: domestic apps and domestic dedicated AI app processes; converted into literal `DIRECT` rules.
 - `rules/app-ai-proxy.list`: dedicated overseas AI processes via `💬 Ai平台`.
 - `rules/app-proxy.list`: other overseas app processes via `🚀 节点选择`.
+- `rules/app-direct-domains.list`: domestic application domains from `my_yml`.
+- `rules/app-proxy-domains.list`: overseas application domains from `my_yml`.
+- `rules/domestic-services.list`: general domestic services from `my_yml`.
+- `rules/overseas-services.list`: general overseas services from `my_yml`.
+- `rules/explicit-direct.list` / `rules/explicit-proxy.list`: original explicit routing exceptions.
 - `scripts/validate_template.py`: standard-library static checks for rule order, DNS coverage and conflicts.
 
 ## GFW rule coverage
@@ -72,9 +77,20 @@ The former `♻️ 自动选择` url-test group has been removed. `🚀 节点�
 
 Default behavior: `💬 Ai平台`, `💻 OpenCode`, and `🐟 漏网之鱼` select `🚀 节点选择` first. Inside `🚀 节点选择`, actual proxy nodes appear **before** the optional `DIRECT` entry, so first-time/default selection is not direct. `🎯 全球直连` still defaults to `DIRECT`, and `🛑 全球拦截` defaults to `REJECT`. A client may preserve a previously stored manual selection; verify it after refreshing.
 
+## Backfilled application and service rules
+
+The source `hoooou/my_yml/优选配置.yaml` includes four explicit domain lists (43 domestic-app, 34 overseas-app, 42 domestic-service, and 84 overseas-service entries) and 24 standalone exceptions. These are now represented in six Surge-style rule lists loaded by Subconverter, after high-priority OpenCode/AI rules and before generic ACL4SSR media/GFW/China lists. Existing app process routing remains ahead of the domain lists.
+
+- Restored entries: **43 + 34 + 42 + 83** application/service domain rules, **17** explicit direct exceptions and **5** explicit proxy exceptions.
+- `googleapis.com` is deliberately not blanket-proxied, as it is a shared service provider domain. Dedicated Google AI API rules stay under `💬 Ai平台`; `googleapis.cn` remains proxied.
+- Two original standalone office domain exceptions, `yiche.com` and `bitautotech.com`, were already in `clash-base.yaml` and are therefore not duplicated in `explicit-direct.list`.
+- Microsoft and OneDrive retain explicit DIRECT overrides. Copilot and other foreign AI endpoints still follow the earlier `💬 Ai平台` rules.
+- Sources may overlap intentionally; Mihomo uses the first matched rule. No corporate DNS, Fake-IP exceptions, general DNS policy, UDP restrictions, node definitions or select-group defaults were modified.
+- Subconverter must actually fetch these six ruleset files when **regenerating** the full subscription. Merely refreshing a cached/static generated YAML may not include them. The repository static checks cannot prove conversion or real FlClash/Shadowrocket behavior.
+
 ## Rule ordering and client update
 
-The generated Mihomo configuration must preserve: LAN/private exceptions -> existing UDP policy -> `opencode.ai` via `💻 OpenCode` -> app process lists from Subconverter (`app-direct`, `app-ai-proxy`, `app-proxy`) -> custom domestic AI domains via literal `DIRECT` -> overseas AI domains via `💬 Ai平台` -> upstream ACL4SSR AI/GFW/general rules. The base file is prepended when `overwrite_original_rules=false`.
+The generated Mihomo configuration must preserve: LAN/private exceptions -> existing UDP policy -> `opencode.ai` via `💻 OpenCode` -> app process lists from Subconverter (`app-direct`, `app-ai-proxy`, `app-proxy`) -> dedicated domestic AI and overseas AI domains -> restored service exceptions and app/service domains -> generic ACL4SSR media/GFW/China rules. The base file is prepended when `overwrite_original_rules=false`.
 
 Update the EdgeTunnel subscription by asking EdgeTunnel/Subconverter to **regenerate** its subscription using the existing `.ini` URL, then update that same subscription in FlClash. A cached/static converted YAML does not refresh just because the referenced base or rules files changed. Use FlClash connection logs to verify process matching; the client must capture app traffic and provide Android package names.
 
