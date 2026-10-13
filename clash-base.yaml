@@ -71,10 +71,13 @@ dns:
     '+.bitautotech.com':
       - 192.168.70.49
       - 192.168.70.1
-    # OpenCode uses its dedicated group for both website and DNS.
+    # OpenCode website still uses the dedicated proxy rule. Avoid Cloudflare DoH
+    # over Cloudflare Workers sockets; use independent Quad9 via proxy plus
+    # reachable local encrypted DNS as fallback if proxied DNS times out.
     '+.opencode.ai':
-      - 'https://1.1.1.1/dns-query#💻 OpenCode'
-      - 'https://8.8.8.8/dns-query#💻 OpenCode'
+      - 'https://dns.quad9.net/dns-query#💻 OpenCode'
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
     # Domestic AI domains are resolved through domestic HTTPS DNS.
     '+.deepseek.com':
       - 'https://dns.alidns.com/dns-query'
