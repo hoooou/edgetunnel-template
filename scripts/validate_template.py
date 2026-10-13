@@ -61,6 +61,35 @@ def main() -> None:
     assert "#💬 Ai平台" in BASE and "#💻 OpenCode" in BASE
     assert not re.search(r"^  - 'PROCESS-NAME,com\\.", BASE, re.M), "App process rules remain in base"
 
+    # Backfilled my_yml domain classes must remain before generic ACL4SSR/GFW.
+    restored = [
+        ("rules/explicit-direct.list", "DIRECT", 17),
+        ("rules/explicit-proxy.list", "🚀 节点选择", 5),
+        ("rules/app-proxy-domains.list", "🚀 节点选择", 34),
+        ("rules/app-direct-domains.list", "DIRECT", 43),
+        ("rules/overseas-services.list", "🚀 节点选择", 83),
+        ("rules/domestic-services.list", "DIRECT", 42),
+    ]
+    for path, policy, count in restored:
+        entries = [x for x in (ROOT / path).read_text(encoding="utf-8").splitlines()
+                   if x.startswith(("DOMAIN,", "DOMAIN-SUFFIX,"))]
+        assert len(entries) == count, f"{path} count changed; review reference my_yml"
+        assert len(entries) == len(set(entries)), f"{path} duplicate domain rules"
+        assert f"ruleset={policy},https://raw.githubusercontent.com/hoooou/edgetunnel-template/main/{path}" in INI
+    required_order(INI, [
+        "rules/ai-direct.list", "rules/ai-proxy.list",
+        "Clash/Ruleset/AI.list", "Clash/Ruleset/OpenAi.list",
+        "rules/explicit-direct.list", "rules/explicit-proxy.list",
+        "rules/app-proxy-domains.list", "rules/app-direct-domains.list",
+        "rules/overseas-services.list", "rules/domestic-services.list",
+        "Clash/ProxyGFWlist.list", "Clash/ChinaDomain.list", "[]FINAL",
+    ])
+    assert "DOMAIN-SUFFIX,microsoft.com" in (ROOT / "rules/explicit-direct.list").read_text(encoding="utf-8")
+    assert "DOMAIN-SUFFIX,onedrive.com" in (ROOT / "rules/explicit-direct.list").read_text(encoding="utf-8")
+    assert "DOMAIN-SUFFIX,bilibili.com" in (ROOT / "rules/app-direct-domains.list").read_text(encoding="utf-8")
+    assert "DOMAIN-SUFFIX,discord.com" in (ROOT / "rules/app-proxy-domains.list").read_text(encoding="utf-8")
+    assert "DOMAIN-SUFFIX,googleapis.com" not in (ROOT / "rules/overseas-services.list").read_text(encoding="utf-8")
+
     required_order(INI, [
         "rules/app-direct.list",
         "rules/app-ai-proxy.list",
