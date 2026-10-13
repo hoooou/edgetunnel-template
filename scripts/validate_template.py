@@ -144,8 +144,8 @@ def main() -> None:
     assert "https://1.1.1.1/dns-query#" not in dns_config
     assert "https://8.8.8.8/dns-query#" not in dns_config
     assert "  fallback:\n    - 'https://9.9.9.9/dns-query#🚀 节点选择'\n    - 'https://doh.opendns.com/dns-query#🚀 节点选择'" in BASE
-    # Regression: foreign AI DNS uses direct encrypted resolvers, not the proxy.
-    # OpenCode success confirmed this path; overseas AI coverage is a trial.
+    # Keep overseas AI DNS out of domestic resolvers and route via general node selector.
+    # AI *website* traffic still routes independently via 💬 Ai平台.
     assert "https://9.9.9.9/dns-query#💬 Ai平台" not in dns_config
     assert "https://doh.opendns.com/dns-query#💬 Ai平台" not in dns_config
     for rule in proxy_domains:
@@ -160,9 +160,10 @@ def main() -> None:
             if line.startswith("      - "):
                 values.append(line.strip())
         assert values == [
-            "- 'https://dns.alidns.com/dns-query'",
-            "- 'https://doh.pub/dns-query'",
-        ], f"Wrong direct overseas AI DNS policy for {key}: {values}"
+            "- 'https://9.9.9.9/dns-query#🚀 节点选择'",
+            "- 'https://doh.opendns.com/dns-query#🚀 节点选择'",
+        ], f"Wrong overseas AI DNS policy for {key}: {values}"
+    # OpenCode remains a deliberately tested exception using direct Chinese DNS.
     assert "'+.opencode.ai':\n      - 'https://dns.alidns.com/dns-query'\n      - 'https://doh.pub/dns-query'" in BASE
     assert len(process_names) == 74, f"Unexpected process count: {len(process_names)}"
     print(f"Static checks passed: {len(process_names)} processes, {len(direct_domains)} domestic AI domains, {len(proxy_domains)} overseas AI domains.")
