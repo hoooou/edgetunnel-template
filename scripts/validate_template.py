@@ -58,7 +58,10 @@ def main() -> None:
         assert dns_entry in BASE, f"Wrong corporate DNS policy: {domain}"
         assert f"    - '+.{domain}'" in BASE, f"Missing fake-IP exclusion: {domain}"
         assert f"DOMAIN-SUFFIX,{domain},DIRECT" in BASE, f"Missing direct route: {domain}"
-    assert "#💬 Ai平台" in BASE and "#💻 OpenCode" in BASE
+    # Website proxy route and DNS transport are independent. DNS intentionally
+    # no longer embeds AI/OpenCode group suffixes after the successful DNS fix.
+    assert "ruleset=💬 Ai平台,https://raw.githubusercontent.com/hoooou/edgetunnel-template/main/rules/ai-proxy.list" in INI
+    assert "DOMAIN-SUFFIX,opencode.ai,💻 OpenCode" in BASE
     assert not re.search(r"^  - 'PROCESS-NAME,com\\.", BASE, re.M), "App process rules remain in base"
 
     # Backfilled my_yml domain classes must remain before generic ACL4SSR/GFW.
