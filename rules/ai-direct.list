@@ -1,0 +1,26 @@
+# China AI: match only product/API domains; don't use cloud-provider parent domains.
+# All rules in this file route to DIRECT (not a selectable proxy group).
+DOMAIN-SUFFIX,deepseek.com
+DOMAIN-SUFFIX,qwen.ai
+DOMAIN-SUFFIX,tongyi.aliyun.com
+DOMAIN-SUFFIX,dashscope.aliyuncs.com
+DOMAIN-SUFFIX,modelscope.cn
+DOMAIN-SUFFIX,doubao.com
+DOMAIN,ark.cn-beijing.volces.com
+DOMAIN,ark.cn-shanghai.volces.com
+DOMAIN-SUFFIX,kimi.com
+DOMAIN-SUFFIX,moonshot.cn
+DOMAIN-SUFFIX,moonshot.ai
+DOMAIN-SUFFIX,bigmodel.cn
+DOMAIN-SUFFIX,chatglm.cn
+DOMAIN-SUFFIX,z.ai
+DOMAIN-SUFFIX,minimax.io
+DOMAIN-SUFFIX,minimaxi.com
+DOMAIN-SUFFIX,minimax.chat
+DOMAIN,yiyan.baidu.com
+DOMAIN-SUFFIX,yuanbao.tencent.com
+DOMAIN-SUFFIX,hunyuan.tencent.com
+DOMAIN-SUFFIX,xinghuo.xfyun.cn
+DOMAIN-SUFFIX,spark-api.xf-yun.com
+DOMAIN-SUFFIX,siliconflow.cn
+DOMAIN-SUFFIX,siliconflow.com
