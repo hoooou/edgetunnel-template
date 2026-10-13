@@ -1,0 +1,14 @@
+# Other overseas applications using the general node-selection group.
+PROCESS-NAME,com.twitter.android
+PROCESS-NAME,com.android.vending
+PROCESS-NAME,com.google.android.gms
+PROCESS-NAME,com.google.android.gsf
+PROCESS-NAME,com.google.android.youtube
+PROCESS-NAME,com.instagram.barcelona
+PROCESS-NAME,org.telegram.messenger
+PROCESS-NAME,Telegram
+PROCESS-NAME,Telegram.exe
+PROCESS-NAME,com.discord
+PROCESS-NAME,Discord
+PROCESS-NAME,Discord.exe
+PROCESS-NAME,com.instagram.android
