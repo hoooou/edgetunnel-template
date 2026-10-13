@@ -8,6 +8,10 @@ Generated: 2026-09-21
 - `ACL4SSR_Online_Mini_Ai_Merged.ini`: ACL4SSR Mini AI template plus custom AI rule imports and the independent `💻 OpenCode` group.
 - `rules/ai-direct.list`: China-based AI site and API rules, always `DIRECT`.
 - `rules/ai-proxy.list`: overseas AI site/API/resource rules, via `💬 Ai平台`.
+- `rules/app-direct.list`: domestic apps and domestic dedicated AI app processes; converted into literal `DIRECT` rules.
+- `rules/app-ai-proxy.list`: dedicated overseas AI processes via `💬 Ai平台`.
+- `rules/app-proxy.list`: other overseas app processes via `🚀 节点选择`.
+- `scripts/validate_template.py`: standard-library static checks for rule order, DNS coverage and conflicts.
 
 ## GFW rule coverage
 
@@ -58,7 +62,7 @@ Only output node information
 
 ## Rule ordering and client update
 
-The generated Mihomo configuration must preserve: LAN/private exceptions -> existing UDP policy -> `opencode.ai` via `💻 OpenCode` -> dedicated AI and other app processes -> custom domestic AI domains via literal `DIRECT` -> custom overseas AI domains via `💬 Ai平台` -> upstream ACL4SSR AI/GFW/general rules. The base file is prepended when `overwrite_original_rules=false`.
+The generated Mihomo configuration must preserve: LAN/private exceptions -> existing UDP policy -> `opencode.ai` via `💻 OpenCode` -> app process lists from Subconverter (`app-direct`, `app-ai-proxy`, `app-proxy`) -> custom domestic AI domains via literal `DIRECT` -> overseas AI domains via `💬 Ai平台` -> upstream ACL4SSR AI/GFW/general rules. The base file is prepended when `overwrite_original_rules=false`.
 
 Update the EdgeTunnel subscription by asking EdgeTunnel/Subconverter to **regenerate** its subscription using the existing `.ini` URL, then update that same subscription in FlClash. A cached/static converted YAML does not refresh just because the referenced base or rules files changed. Use FlClash connection logs to verify process matching; the client must capture app traffic and provide Android package names.
 
@@ -90,3 +94,25 @@ The final generated Clash/Mihomo profile must put these before the downloaded AC
 ```
 
 LAN/private rules intentionally precede them.
+
+## Phase 2: Mihomo DNS (2026-10-13)
+
+The base profile now enables `dns.enhanced-mode: fake-ip` and split DNS, based on the principles in `hoooou/my_yml` but **without importing its specific office DNS servers**.
+
+- Default DNS and domestic AI policy use Chinese HTTPS DNS (`dns.alidns.com` and `doh.pub`).
+- Overseas AI domains resolve via HTTPS DNS bound to `💬 Ai平台`. `opencode.ai` resolves via `💻 OpenCode`; these policy keys are explicitly mirrored from `ai-proxy.list` and `ai-direct.list`.
+- Other overseas domains use fallback HTTPS DNS through `🚀 节点选择` when the geo-IP filter selects fallback.
+- Proxy-node hostnames use domestic bootstrap resolvers to prevent a proxy-resolution cycle. Direct-domain resolution uses domestic HTTPS DNS; `direct-nameserver-follow-policy: true` follows explicit AI/company overrides.
+- Office domains (`*.yiche.com`, `*.bitauto.com` and related) bypass fake-IP and use `system` DNS, so the current LAN's DNS applies instead of hard-coding `192.168.70.x` on roaming devices.
+- DNS AAAA answers are disabled (`dns.ipv6: false`) to reduce IPv6 direct-route surprises; the pre-existing IPv6 LAN/CIDR rules remain. This is not an absolute leak prevention guarantee.
+- Existing EdgeTunnel UDP rules remain **unchanged**. Overseas DoH uses HTTPS over TCP via an existing proxy group; normal overseas UDP stays rejected.
+
+**Compatibility note:** This is a Mihomo-specific DNS enhancement. A Shadowrocket import may ignore or reinterpret parts of the DNS and process configuration; no live iOS compatibility claim is made. Likewise, Subconverter must inline the three new Surge-format `.list` files during conversion. Inspect the resulting YAML and runtime logs after regenerating the EdgeTunnel subscription. A static YAML refresh alone does not re-run Subconverter.
+
+Run local static tests from the repository root:
+
+```bash
+python3 scripts/validate_template.py
+```
+
+Static tests do not confirm live EdgeTunnel VLESS connectivity, actual AI exit country, certificate trust, DNS response behavior or Android/Shadowrocket app capture. The P2 speed-test/proxy grouping strategy is intentionally unchanged.
