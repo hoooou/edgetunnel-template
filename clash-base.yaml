@@ -26,6 +26,357 @@ ipv6: true
 # Client must expose process/package data to match PROCESS-NAME rules.
 find-process-mode: strict
 
+# DNS inherited by the converter; upstream nodes and route groups are added at conversion time.
+# HTTPS DNS uses TCP, so it does not violate EdgeTunnel's UDP rejection policy.
+dns:
+  enable: true
+  ipv6: false # Do not return unproxied AAAA results; IPv6 LAN rules are preserved separately.
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  fallback:
+    - 'https://1.1.1.1/dns-query#🚀 节点选择'
+    - 'https://8.8.8.8/dns-query#🚀 节点选择'
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+      - 0.0.0.0/32
+  proxy-server-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  direct-nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  direct-nameserver-follow-policy: true
+  nameserver-policy:
+    # Company hosts use the active network's DNS, not fixed office-only 192.168.70.x servers.
+    '+.tech.bitauto.com': system
+    '+.yiche.com': system
+    '+.bitauto.com': system
+    '+.bitautotech.com': system
+    # OpenCode uses its dedicated group for both website and DNS.
+    '+.opencode.ai':
+      - 'https://1.1.1.1/dns-query#💻 OpenCode'
+      - 'https://8.8.8.8/dns-query#💻 OpenCode'
+    # Domestic AI domains are resolved through domestic HTTPS DNS.
+    '+.deepseek.com':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.qwen.ai':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.tongyi.aliyun.com':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.dashscope.aliyuncs.com':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.modelscope.cn':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.doubao.com':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    'ark.cn-beijing.volces.com':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    'ark.cn-shanghai.volces.com':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.kimi.com':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.moonshot.cn':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.moonshot.ai':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.bigmodel.cn':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.chatglm.cn':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.z.ai':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.minimax.io':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.minimaxi.com':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.minimax.chat':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    'yiyan.baidu.com':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.yuanbao.tencent.com':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.hunyuan.tencent.com':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.xinghuo.xfyun.cn':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.spark-api.xf-yun.com':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.siliconflow.cn':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.siliconflow.com':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.baichuan-ai.com':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.stepfun.com':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.stepfun.ai':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    '+.sensenova.cn':
+      - 'https://dns.alidns.com/dns-query'
+      - 'https://doh.pub/dns-query'
+    # Overseas AI domains are resolved through HTTPS DNS via the AI policy group.
+    '+.openai.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.chatgpt.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.oaistatic.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.oaiusercontent.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.oaistatsig.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.openaimerge.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.sora.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.chatgpt.livekit.cloud':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.openaicom.imgix.net':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.openaiapi-site.azureedge.net':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'openai-api.arkoselabs.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'chat.openai.com.cdn.cloudflare.net':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'openaicomproductionae4b.blob.core.windows.net':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'production-openaicom-storage.azureedge.net':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.anthropic.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.claude.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.claude.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.claudeusercontent.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'ai.google.dev':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'aistudio.google.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'gemini.google.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'generativelanguage.googleapis.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'aiplatform.googleapis.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'proactivebackend-pa.googleapis.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'alkalimakersuite-pa.clients6.google.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'makersuite.google.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.notebooklm.google.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.notebooklm.google':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.deepmind.google':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.generativeai.google':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.copilot.microsoft.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.copilot.cloud.microsoft':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'api.githubcopilot.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'copilot-proxy.githubusercontent.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.ai.azure.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'sydney.bing.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.cursor.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.cursor.sh':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.cursorapi.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.grazie.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.grazie.aws.intellij.net':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.jetbrains.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.perplexity.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.pplx.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.grok.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.x.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.meta.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.mistral.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.groq.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.together.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'api.together.xyz':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.openrouter.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.fireworks.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.huggingface.co':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.hf.co':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.replicate.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.fal.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.midjourney.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.runwayml.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.elevenlabs.io':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.suno.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.stability.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.cohere.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.deepinfra.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.cerebras.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    'models.github.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.poe.com':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.character.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.ideogram.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+    '+.leonardo.ai':
+      - 'https://1.1.1.1/dns-query#💬 Ai平台'
+      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+  fake-ip-filter:
+    - '*.lan'
+    - '*.local'
+    - '*.internal'
+    - '*.localhost'
+    - '+.home.arpa'
+    - '+.msftconnecttest.com'
+    - '+.msftncsi.com'
+    - '+.tech.bitauto.com'
+    - '+.yiche.com'
+    - '+.bitauto.com'
+    - '+.bitautotech.com'
+
 # 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）/ script (脚本)
 # mode: rule
 
@@ -982,86 +1333,5 @@ rules:
   - 'DOMAIN-SUFFIX,bitauto.com,DIRECT'
   - 'DOMAIN-SUFFIX,bitautotech.com,DIRECT'
 
-  # Fixed domain exceptions above must precede the application process routes.
-  # Multi-model clients (OpenCode, Cursor, Python, Node, browsers) are not pinned by process.
-  # Domestic dedicated AI -> DIRECT
-  - 'PROCESS-NAME,com.deepseek.chat,DIRECT'
-  - 'PROCESS-NAME,com.moonshot.kimichat,DIRECT'
-  - 'PROCESS-NAME,com.larus.nova,DIRECT'
-  - 'PROCESS-NAME,com.zhipuai.qingyan,DIRECT'
-  - 'PROCESS-NAME,com.tencent.hunyuan.app.chat,DIRECT'
-
-  # Overseas dedicated AI -> AI platform
-  - 'PROCESS-NAME,com.openai.chatgpt,💬 Ai平台'
-  - 'PROCESS-NAME,ChatGPT,💬 Ai平台'
-  - 'PROCESS-NAME,ChatGPT.exe,💬 Ai平台'
-  - 'PROCESS-NAME,com.anthropic.claude,💬 Ai平台'
-  - 'PROCESS-NAME,Claude,💬 Ai平台'
-  - 'PROCESS-NAME,Claude.exe,💬 Ai平台'
-  - 'PROCESS-NAME,Claude Helper,💬 Ai平台'
-  - 'PROCESS-NAME,Claude Helper (GPU),💬 Ai平台'
-  - 'PROCESS-NAME,Claude Helper (Plugin),💬 Ai平台'
-  - 'PROCESS-NAME,Claude Helper (Renderer),💬 Ai平台'
-  - 'PROCESS-NAME,com.google.android.apps.bard,💬 Ai平台'
-
-  # Domestic apps -> DIRECT
-  - 'PROCESS-NAME,com.tencent.mm,DIRECT'
-  - 'PROCESS-NAME,WeChat,DIRECT'
-  - 'PROCESS-NAME,Weixin,DIRECT'
-  - 'PROCESS-NAME,WeChat.exe,DIRECT'
-  - 'PROCESS-NAME,Weixin.exe,DIRECT'
-  - 'PROCESS-NAME,WeChatAppEx,DIRECT'
-  - 'PROCESS-NAME,WeChatAppEx.exe,DIRECT'
-  - 'PROCESS-NAME,com.sina.weibo,DIRECT'
-  - 'PROCESS-NAME,com.sankuai.meituan,DIRECT'
-  - 'PROCESS-NAME,com.dianping.v1,DIRECT'
-  - 'PROCESS-NAME,Meituan,DIRECT'
-  - 'PROCESS-NAME,com.xunmeng.pinduoduo,DIRECT'
-  - 'PROCESS-NAME,com.jingdong.app.mall,DIRECT'
-  - 'PROCESS-NAME,com.autonavi.minimap,DIRECT'
-  - 'PROCESS-NAME,com.tencent.wework,DIRECT'
-  - 'PROCESS-NAME,WeCom,DIRECT'
-  - 'PROCESS-NAME,企业微信,DIRECT'
-  - 'PROCESS-NAME,WXWork.exe,DIRECT'
-  - 'PROCESS-NAME,com.oray.sunlogin,DIRECT'
-  - 'PROCESS-NAME,SunloginClient,DIRECT'
-  - 'PROCESS-NAME,SunloginClient.exe,DIRECT'
-  - 'PROCESS-NAME,sunloginclient,DIRECT'
-  - 'PROCESS-NAME,SunloginClient_Desktop,DIRECT'
-  - 'PROCESS-NAME,SunloginClient_Helper,DIRECT'
-  - 'PROCESS-NAME,SunloginClient_Desktop.exe,DIRECT'
-  - 'PROCESS-NAME,SunloginClient_Service.exe,DIRECT'
-  - 'PROCESS-NAME,com.tencent.wemeet.app,DIRECT'
-  - 'PROCESS-NAME,TencentMeeting,DIRECT'
-  - 'PROCESS-NAME,wemeetapp,DIRECT'
-  - 'PROCESS-NAME,wemeetapp.exe,DIRECT'
-  - 'PROCESS-NAME,com.tencent.mobileqq,DIRECT'
-  - 'PROCESS-NAME,QQ,DIRECT'
-  - 'PROCESS-NAME,QQ.exe,DIRECT'
-  - 'PROCESS-NAME,TIM,DIRECT'
-  - 'PROCESS-NAME,TIM.exe,DIRECT'
-  - 'PROCESS-NAME,com.eg.android.AlipayGphone,DIRECT'
-  - 'PROCESS-NAME,com.taobao.taobao,DIRECT'
-  - 'PROCESS-NAME,tv.danmaku.bili,DIRECT'
-  - 'PROCESS-NAME,哔哩哔哩,DIRECT'
-  - 'PROCESS-NAME,Bilibili,DIRECT'
-  - 'PROCESS-NAME,com.ss.android.ugc.aweme,DIRECT'
-  - 'PROCESS-NAME,com.netease.cloudmusic,DIRECT'
-  - 'PROCESS-NAME,NeteaseMusic,DIRECT'
-  - 'PROCESS-NAME,cloudmusic.exe,DIRECT'
-  - 'PROCESS-NAME,com.xingin.xhs,DIRECT'
-
-  # Other overseas apps -> node selection
-  - 'PROCESS-NAME,com.twitter.android,🚀 节点选择'
-  - 'PROCESS-NAME,com.android.vending,🚀 节点选择'
-  - 'PROCESS-NAME,com.google.android.gms,🚀 节点选择'
-  - 'PROCESS-NAME,com.google.android.gsf,🚀 节点选择'
-  - 'PROCESS-NAME,com.google.android.youtube,🚀 节点选择'
-  - 'PROCESS-NAME,com.instagram.barcelona,🚀 节点选择'
-  - 'PROCESS-NAME,org.telegram.messenger,🚀 节点选择'
-  - 'PROCESS-NAME,Telegram,🚀 节点选择'
-  - 'PROCESS-NAME,Telegram.exe,🚀 节点选择'
-  - 'PROCESS-NAME,com.discord,🚀 节点选择'
-  - 'PROCESS-NAME,Discord,🚀 节点选择'
-  - 'PROCESS-NAME,Discord.exe,🚀 节点选择'
-  - 'PROCESS-NAME,com.instagram.android,🚀 节点选择'
+  # App process rules are injected by Subconverter from rules/app-*.list.
+  # They appear after these fixed exceptions and before the AI / ACL4SSR domain lists.
