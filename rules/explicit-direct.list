@@ -1,0 +1,20 @@
+# Additional explicitly DIRECT exceptions from hoooou/my_yml rule list.
+# yiche.com and bitautotech.com are already high-priority in clash-base.yaml.
+# Keep these before generic ACL4SSR/GFW rules; copilot/AI domains matched earlier remain AI.
+DOMAIN-SUFFIX,zijieapi.com
+DOMAIN-SUFFIX,office.com
+DOMAIN-SUFFIX,outlook.com
+DOMAIN-SUFFIX,jiuse3.cloud
+DOMAIN-SUFFIX,onenote.com
+DOMAIN-SUFFIX,clarivate.cn
+DOMAIN-SUFFIX,onedrive.com
+DOMAIN-SUFFIX,microsoftonline.com
+DOMAIN-SUFFIX,sharepoint.com
+DOMAIN-SUFFIX,azure.com
+DOMAIN-SUFFIX,qq.com
+DOMAIN-SUFFIX,microsoft.com
+DOMAIN,clash.razord.top
+DOMAIN,yacd.haishan.me
+DOMAIN-SUFFIX,jzmedia.xyz
+DOMAIN-SUFFIX,gitee.com
+DOMAIN,free886.herokuapp.com
