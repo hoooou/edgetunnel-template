@@ -83,6 +83,9 @@ def main() -> None:
         line = next(l for l in INI.splitlines() if l.startswith(f"custom_proxy_group={name}`"))
         assert "`select`[]🚀 节点选择" in line, f"Wrong default for {name}"
     assert "♻️ 自动选择" not in INI, "Removed auto-select group must not be referenced"
+    assert "自动测速：支持" not in INI, "Stale automatic-speed-test comment"
+    assert "cfw-latency-url:" not in BASE, "Remove legacy Clash for Windows latency probe"
+    assert "cfw-latency-timeout:" not in BASE, "Remove legacy Clash for Windows latency timeout"
     assert "`url-test`" not in INI, "Auto-test group must not be generated"
     assert "ruleset=DIRECT,https://raw.githubusercontent.com/hoooou/edgetunnel-template/main/rules/ai-direct.list" in INI
 
