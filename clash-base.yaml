@@ -56,11 +56,21 @@ dns:
     - https://doh.pub/dns-query
   direct-nameserver-follow-policy: true
   nameserver-policy:
-    # Company hosts use the active network's DNS, not fixed office-only 192.168.70.x servers.
-    '+.tech.bitauto.com': system
-    '+.yiche.com': system
-    '+.bitauto.com': system
-    '+.bitautotech.com': system
+    # Office split-horizon DNS: use the corporate resolvers on company Wi-Fi / LAN.
+    # Public DNS (and system DNS when hijacked by fake-IP/TUN) can resolve these to public sites.
+    # The private IPs are reachable only on the corporate network or an approved company VPN.
+    '+.tech.bitauto.com':
+      - 192.168.70.49
+      - 192.168.70.1
+    '+.yiche.com':
+      - 192.168.70.49
+      - 192.168.70.1
+    '+.bitauto.com':
+      - 192.168.70.49
+      - 192.168.70.1
+    '+.bitautotech.com':
+      - 192.168.70.49
+      - 192.168.70.1
     # OpenCode uses its dedicated group for both website and DNS.
     '+.opencode.ai':
       - 'https://1.1.1.1/dns-query#💻 OpenCode'
