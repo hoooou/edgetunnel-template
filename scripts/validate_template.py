@@ -130,6 +130,14 @@ def main() -> None:
         key = f"+.{domain}" if kind == "DOMAIN-SUFFIX" else domain
         assert f"'{key}':" in BASE, f"Missing DNS policy: {key}"
     assert "'+.opencode.ai':" in BASE
+    # Prevent regression: OpenCode's DNS must not depend solely on overseas
+    # upstreams dialed through the same proxy (Cloudflare Workers blocks CF IPs).
+    opencode_dns = BASE.split("    '+.opencode.ai':\n", 1)[1].split("    # Domestic AI domains", 1)[0]
+    assert "https://dns.quad9.net/dns-query#💻 OpenCode" in opencode_dns
+    assert "https://dns.alidns.com/dns-query" in opencode_dns
+    assert "https://doh.pub/dns-query" in opencode_dns
+    assert "https://1.1.1.1/dns-query#💻 OpenCode" not in opencode_dns
+    assert "https://8.8.8.8/dns-query#💻 OpenCode" not in opencode_dns
     assert len(process_names) == 74, f"Unexpected process count: {len(process_names)}"
     print(f"Static checks passed: {len(process_names)} processes, {len(direct_domains)} domestic AI domains, {len(proxy_domains)} overseas AI domains.")
     print("Not verified: live Subconverter expansion, Mihomo runtime, Shadowrocket import, Android process identity and real DNS behavior.")
