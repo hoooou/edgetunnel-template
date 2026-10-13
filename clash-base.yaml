@@ -23,6 +23,8 @@ allow-lan: true
 # #"[aaaa::a8aa:ff:fe09:57d8]": 绑定单个IPv6地址
 bind-address: "*"
 ipv6: true
+# Client must expose process/package data to match PROCESS-NAME rules.
+find-process-mode: strict
 
 # 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）/ script (脚本)
 # mode: rule
@@ -979,3 +981,87 @@ rules:
   - 'DOMAIN-SUFFIX,yiche.com,DIRECT'
   - 'DOMAIN-SUFFIX,bitauto.com,DIRECT'
   - 'DOMAIN-SUFFIX,bitautotech.com,DIRECT'
+
+  # Fixed domain exceptions above must precede the application process routes.
+  # Multi-model clients (OpenCode, Cursor, Python, Node, browsers) are not pinned by process.
+  # Domestic dedicated AI -> DIRECT
+  - 'PROCESS-NAME,com.deepseek.chat,DIRECT'
+  - 'PROCESS-NAME,com.moonshot.kimichat,DIRECT'
+  - 'PROCESS-NAME,com.larus.nova,DIRECT'
+  - 'PROCESS-NAME,com.zhipuai.qingyan,DIRECT'
+  - 'PROCESS-NAME,com.tencent.hunyuan.app.chat,DIRECT'
+
+  # Overseas dedicated AI -> AI platform
+  - 'PROCESS-NAME,com.openai.chatgpt,💬 Ai平台'
+  - 'PROCESS-NAME,ChatGPT,💬 Ai平台'
+  - 'PROCESS-NAME,ChatGPT.exe,💬 Ai平台'
+  - 'PROCESS-NAME,com.anthropic.claude,💬 Ai平台'
+  - 'PROCESS-NAME,Claude,💬 Ai平台'
+  - 'PROCESS-NAME,Claude.exe,💬 Ai平台'
+  - 'PROCESS-NAME,Claude Helper,💬 Ai平台'
+  - 'PROCESS-NAME,Claude Helper (GPU),💬 Ai平台'
+  - 'PROCESS-NAME,Claude Helper (Plugin),💬 Ai平台'
+  - 'PROCESS-NAME,Claude Helper (Renderer),💬 Ai平台'
+  - 'PROCESS-NAME,com.google.android.apps.bard,💬 Ai平台'
+
+  # Domestic apps -> DIRECT
+  - 'PROCESS-NAME,com.tencent.mm,DIRECT'
+  - 'PROCESS-NAME,WeChat,DIRECT'
+  - 'PROCESS-NAME,Weixin,DIRECT'
+  - 'PROCESS-NAME,WeChat.exe,DIRECT'
+  - 'PROCESS-NAME,Weixin.exe,DIRECT'
+  - 'PROCESS-NAME,WeChatAppEx,DIRECT'
+  - 'PROCESS-NAME,WeChatAppEx.exe,DIRECT'
+  - 'PROCESS-NAME,com.sina.weibo,DIRECT'
+  - 'PROCESS-NAME,com.sankuai.meituan,DIRECT'
+  - 'PROCESS-NAME,com.dianping.v1,DIRECT'
+  - 'PROCESS-NAME,Meituan,DIRECT'
+  - 'PROCESS-NAME,com.xunmeng.pinduoduo,DIRECT'
+  - 'PROCESS-NAME,com.jingdong.app.mall,DIRECT'
+  - 'PROCESS-NAME,com.autonavi.minimap,DIRECT'
+  - 'PROCESS-NAME,com.tencent.wework,DIRECT'
+  - 'PROCESS-NAME,WeCom,DIRECT'
+  - 'PROCESS-NAME,企业微信,DIRECT'
+  - 'PROCESS-NAME,WXWork.exe,DIRECT'
+  - 'PROCESS-NAME,com.oray.sunlogin,DIRECT'
+  - 'PROCESS-NAME,SunloginClient,DIRECT'
+  - 'PROCESS-NAME,SunloginClient.exe,DIRECT'
+  - 'PROCESS-NAME,sunloginclient,DIRECT'
+  - 'PROCESS-NAME,SunloginClient_Desktop,DIRECT'
+  - 'PROCESS-NAME,SunloginClient_Helper,DIRECT'
+  - 'PROCESS-NAME,SunloginClient_Desktop.exe,DIRECT'
+  - 'PROCESS-NAME,SunloginClient_Service.exe,DIRECT'
+  - 'PROCESS-NAME,com.tencent.wemeet.app,DIRECT'
+  - 'PROCESS-NAME,TencentMeeting,DIRECT'
+  - 'PROCESS-NAME,wemeetapp,DIRECT'
+  - 'PROCESS-NAME,wemeetapp.exe,DIRECT'
+  - 'PROCESS-NAME,com.tencent.mobileqq,DIRECT'
+  - 'PROCESS-NAME,QQ,DIRECT'
+  - 'PROCESS-NAME,QQ.exe,DIRECT'
+  - 'PROCESS-NAME,TIM,DIRECT'
+  - 'PROCESS-NAME,TIM.exe,DIRECT'
+  - 'PROCESS-NAME,com.eg.android.AlipayGphone,DIRECT'
+  - 'PROCESS-NAME,com.taobao.taobao,DIRECT'
+  - 'PROCESS-NAME,tv.danmaku.bili,DIRECT'
+  - 'PROCESS-NAME,哔哩哔哩,DIRECT'
+  - 'PROCESS-NAME,Bilibili,DIRECT'
+  - 'PROCESS-NAME,com.ss.android.ugc.aweme,DIRECT'
+  - 'PROCESS-NAME,com.netease.cloudmusic,DIRECT'
+  - 'PROCESS-NAME,NeteaseMusic,DIRECT'
+  - 'PROCESS-NAME,cloudmusic.exe,DIRECT'
+  - 'PROCESS-NAME,com.xingin.xhs,DIRECT'
+
+  # Other overseas apps -> node selection
+  - 'PROCESS-NAME,com.twitter.android,🚀 节点选择'
+  - 'PROCESS-NAME,com.android.vending,🚀 节点选择'
+  - 'PROCESS-NAME,com.google.android.gms,🚀 节点选择'
+  - 'PROCESS-NAME,com.google.android.gsf,🚀 节点选择'
+  - 'PROCESS-NAME,com.google.android.youtube,🚀 节点选择'
+  - 'PROCESS-NAME,com.instagram.barcelona,🚀 节点选择'
+  - 'PROCESS-NAME,org.telegram.messenger,🚀 节点选择'
+  - 'PROCESS-NAME,Telegram,🚀 节点选择'
+  - 'PROCESS-NAME,Telegram.exe,🚀 节点选择'
+  - 'PROCESS-NAME,com.discord,🚀 节点选择'
+  - 'PROCESS-NAME,Discord,🚀 节点选择'
+  - 'PROCESS-NAME,Discord.exe,🚀 节点选择'
+  - 'PROCESS-NAME,com.instagram.android,🚀 节点选择'
