@@ -70,3 +70,12 @@ DOMAIN-SUFFIX,runwayml.com
 DOMAIN-SUFFIX,elevenlabs.io
 DOMAIN-SUFFIX,suno.com
 DOMAIN-SUFFIX,stability.ai
+# Additional overseas AI platforms
+DOMAIN-SUFFIX,cohere.com
+DOMAIN-SUFFIX,deepinfra.com
+DOMAIN-SUFFIX,cerebras.ai
+DOMAIN,models.github.ai
+DOMAIN-SUFFIX,poe.com
+DOMAIN-SUFFIX,character.ai
+DOMAIN-SUFFIX,ideogram.ai
+DOMAIN-SUFFIX,leonardo.ai
