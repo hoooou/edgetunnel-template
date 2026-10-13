@@ -40,8 +40,8 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
   fallback:
-    - 'https://1.1.1.1/dns-query#🚀 节点选择'
-    - 'https://8.8.8.8/dns-query#🚀 节点选择'
+    - 'https://9.9.9.9/dns-query#🚀 节点选择'
+    - 'https://doh.opendns.com/dns-query#🚀 节点选择'
   fallback-filter:
     geoip: true
     geoip-code: CN
@@ -71,13 +71,12 @@ dns:
     '+.bitautotech.com':
       - 192.168.70.49
       - 192.168.70.1
-    # OpenCode website still uses the dedicated proxy rule. Avoid Cloudflare DoH
-    # over Cloudflare Workers sockets; use independent Quad9 via proxy plus
-    # reachable local encrypted DNS as fallback if proxied DNS times out.
+    # OpenCode website uses its own proxy group; resolve through independent
+    # non-Cloudflare HTTPS DNS endpoints. DoH upstreams may run concurrently.
+    # Quad9 IP URL avoids bootstrap DNS; OpenDNS hostname uses default-nameserver.
     '+.opencode.ai':
-      - 'https://dns.quad9.net/dns-query#💻 OpenCode'
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#💻 OpenCode'
+      - 'https://doh.opendns.com/dns-query#💻 OpenCode'
     # Domestic AI domains are resolved through domestic HTTPS DNS.
     '+.deepseek.com':
       - 'https://dns.alidns.com/dns-query'
@@ -165,218 +164,218 @@ dns:
       - 'https://doh.pub/dns-query'
     # Overseas AI domains are resolved through HTTPS DNS via the AI policy group.
     '+.openai.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.chatgpt.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.oaistatic.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.oaiusercontent.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.oaistatsig.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.openaimerge.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.sora.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.chatgpt.livekit.cloud':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.openaicom.imgix.net':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.openaiapi-site.azureedge.net':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'openai-api.arkoselabs.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'chat.openai.com.cdn.cloudflare.net':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'openaicomproductionae4b.blob.core.windows.net':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'production-openaicom-storage.azureedge.net':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.anthropic.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.claude.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.claude.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.claudeusercontent.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'ai.google.dev':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'aistudio.google.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'gemini.google.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'generativelanguage.googleapis.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'aiplatform.googleapis.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'proactivebackend-pa.googleapis.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'alkalimakersuite-pa.clients6.google.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'makersuite.google.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.notebooklm.google.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.notebooklm.google':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.deepmind.google':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.generativeai.google':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.copilot.microsoft.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.copilot.cloud.microsoft':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'api.githubcopilot.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'copilot-proxy.githubusercontent.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.ai.azure.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'sydney.bing.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.cursor.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.cursor.sh':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.cursorapi.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.grazie.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.grazie.aws.intellij.net':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.jetbrains.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.perplexity.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.pplx.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.grok.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.x.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.meta.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.mistral.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.groq.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.together.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'api.together.xyz':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.openrouter.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.fireworks.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.huggingface.co':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.hf.co':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.replicate.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.fal.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.midjourney.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.runwayml.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.elevenlabs.io':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.suno.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.stability.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.cohere.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.deepinfra.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.cerebras.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     'models.github.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.poe.com':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.character.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.ideogram.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
     '+.leonardo.ai':
-      - 'https://1.1.1.1/dns-query#💬 Ai平台'
-      - 'https://8.8.8.8/dns-query#💬 Ai平台'
+      - 'https://9.9.9.9/dns-query#💬 Ai平台'
+      - 'https://doh.opendns.com/dns-query#💬 Ai平台'
   fake-ip-filter:
     - '*.lan'
     - '*.local'
