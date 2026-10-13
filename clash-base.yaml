@@ -163,220 +163,220 @@ dns:
     '+.sensenova.cn':
       - 'https://dns.alidns.com/dns-query'
       - 'https://doh.pub/dns-query'
-    # Overseas AI names resolve via direct encrypted DNS; domain connections still use 💬 Ai平台.
+    # Overseas AI DNS uses non-CN encrypted resolvers through 🚀 节点选择.
     '+.openai.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.chatgpt.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.oaistatic.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.oaiusercontent.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.oaistatsig.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.openaimerge.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.sora.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.chatgpt.livekit.cloud':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.openaicom.imgix.net':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.openaiapi-site.azureedge.net':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'openai-api.arkoselabs.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'chat.openai.com.cdn.cloudflare.net':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'openaicomproductionae4b.blob.core.windows.net':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'production-openaicom-storage.azureedge.net':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.anthropic.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.claude.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.claude.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.claudeusercontent.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'ai.google.dev':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'aistudio.google.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'gemini.google.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'generativelanguage.googleapis.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'aiplatform.googleapis.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'proactivebackend-pa.googleapis.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'alkalimakersuite-pa.clients6.google.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'makersuite.google.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.notebooklm.google.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.notebooklm.google':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.deepmind.google':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.generativeai.google':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.copilot.microsoft.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.copilot.cloud.microsoft':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'api.githubcopilot.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'copilot-proxy.githubusercontent.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.ai.azure.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'sydney.bing.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.cursor.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.cursor.sh':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.cursorapi.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.grazie.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.grazie.aws.intellij.net':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.jetbrains.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.perplexity.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.pplx.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.grok.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.x.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.meta.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.mistral.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.groq.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.together.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'api.together.xyz':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.openrouter.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.fireworks.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.huggingface.co':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.hf.co':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.replicate.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.fal.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.midjourney.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.runwayml.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.elevenlabs.io':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.suno.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.stability.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.cohere.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.deepinfra.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.cerebras.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     'models.github.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.poe.com':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.character.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.ideogram.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
     '+.leonardo.ai':
-      - 'https://dns.alidns.com/dns-query'
-      - 'https://doh.pub/dns-query'
+      - 'https://9.9.9.9/dns-query#🚀 节点选择'
+      - 'https://doh.opendns.com/dns-query#🚀 节点选择'
   fake-ip-filter:
     - '*.lan'
     - '*.local'
