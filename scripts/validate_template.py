@@ -51,6 +51,8 @@ def main() -> None:
         "DOMAIN-SUFFIX,bitautotech.com,DIRECT",
     ])
     assert "find-process-mode: strict" in BASE
+    # IP-only connections must still match DOMAIN rules (else they fall to 漏网之鱼).
+    assert "\nsniffer:\n  enable: true\n" in BASE and "  parse-pure-ip: true\n" in BASE
     assert "  enable: true" in BASE and "  enhanced-mode: fake-ip" in BASE
     assert "proxy-server-nameserver:" in BASE and "direct-nameserver:" in BASE
     # Corporate split-horizon DNS must never silently switch back to system/public DNS.
