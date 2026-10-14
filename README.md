@@ -22,6 +22,12 @@ Generated: 2026-09-21
 
 The template uses ACL4SSR's lightweight `ProxyLite.list` for `🚀 节点选择`, replacing the much larger `ProxyGFWlist.list`. This **only reduces the imported generic GFW list** and does not change DNS, Fake-IP, IPv6, UDP, application or AI policies. Explicit AI rules still take priority; other overseas services use the existing app/service lists or `🐟 漏网之鱼` (which defaults to `🚀 节点选择`). After Subconverter regenerates the subscription, compare mobile FlClash behavior under the same node/network. A smaller rule list alone is not evidence that DNS timeouts or Cloudflare Worker egress restrictions are fixed.
 
+## Mobile DNS-resolution A/B test (2026-10-14)
+
+The final country-IP fallback has been changed from `ruleset=🎯 全球直连,[]GEOIP,CN` to `ruleset=🎯 全球直连,[]GEOIP,CN,no-resolve`. This prevents the country-IP match itself from initiating a domain DNS lookup solely to classify an unknown hostname. Existing resolved-IP traffic can still match CN; unmatched domain traffic can reach `🐟 漏网之鱼` (defaults to `🚀 节点选择`), including some Chinese domains not in the earlier direct lists. All 71 dedicated overseas AI DNS policies, Quad9/OpenDNS fallback, `opencode.ai` exception, corporate split DNS, UDP and proxy groups are **unchanged**. This is **not** a fix for foreign DoH connection timeouts or Cloudflare entrance TCP resets.
+
+For the A/B test, have EdgeTunnel/Subconverter regenerate the subscription, refresh/restart FlClash on Android, and verify the emitted YAML includes `GEOIP,CN,🎯 全球直连,no-resolve`. Then compare the same selected node over the same mobile network against the prior profile. To rollback only this experiment, restore `ruleset=🎯 全球直连,[]GEOIP,CN` in the `.ini`.
+
 ## Included policy
 
 1. Local/private networks remain direct.
