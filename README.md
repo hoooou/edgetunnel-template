@@ -20,7 +20,7 @@ Generated: 2026-09-21
 
 ## GFW rule coverage
 
-The template uses ACL4SSR's full `ProxyGFWlist.list` for `🚀 节点选择` instead of the smaller `ProxyLite.list`. Explicit AI rules remain earlier, so OpenAI/Claude-related domains and overseas AI resources such as `huggingface.co` enter `💬 Ai平台`; remaining GFW-listed non-AI sites use `🚀 节点选择`. Domains not matched by any rule still reach `🐟 漏网之鱼`, which can remain set to `🎯 全球直连`.
+The template uses ACL4SSR's lightweight `ProxyLite.list` for `🚀 节点选择`, replacing the much larger `ProxyGFWlist.list`. This **only reduces the imported generic GFW list** and does not change DNS, Fake-IP, IPv6, UDP, application or AI policies. Explicit AI rules still take priority; other overseas services use the existing app/service lists or `🐟 漏网之鱼` (which defaults to `🚀 节点选择`). After Subconverter regenerates the subscription, compare mobile FlClash behavior under the same node/network. A smaller rule list alone is not evidence that DNS timeouts or Cloudflare Worker egress restrictions are fixed.
 
 ## Included policy
 
