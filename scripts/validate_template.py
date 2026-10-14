@@ -136,10 +136,17 @@ def main() -> None:
     a = {x.split(",", 1)[1] for x in direct_domains}
     b = {x.split(",", 1)[1] for x in proxy_domains}
     assert a.isdisjoint(b), f"Domestic/overseas exact-domain overlap: {a & b}"
-    for rule in direct_domains + proxy_domains:
+    # Domestic AI keeps explicit local DNS; overseas AI relies on fake-IP,
+    # domain routing, and the existing global nameserver/fallback only when needed.
+    dns_policy = BASE.split("  nameserver-policy:\n", 1)[1].split("  fake-ip-filter:", 1)[0]
+    for rule in direct_domains:
         kind, domain = rule.split(",", 1)
         key = f"+.{domain}" if kind == "DOMAIN-SUFFIX" else domain
-        assert f"'{key}':" in BASE, f"Missing DNS policy: {key}"
+        assert f"    '{key}':" in dns_policy, f"Missing domestic AI DNS policy: {key}"
+    for rule in proxy_domains:
+        kind, domain = rule.split(",", 1)
+        key = f"+.{domain}" if kind == "DOMAIN-SUFFIX" else domain
+        assert f"    '{key}':" not in dns_policy, f"Unexpected overseas AI DNS policy: {key}"
     assert "'+.opencode.ai':" in BASE
     # Do not resolve OpenCode through EdgeTunnel: its proxied DoH URLs timed out.
     # Website traffic stays routed to the OpenCode group by high-priority rules.
@@ -152,25 +159,10 @@ def main() -> None:
     assert "https://1.1.1.1/dns-query#" not in dns_config
     assert "https://8.8.8.8/dns-query#" not in dns_config
     assert "  fallback:\n    - 'https://9.9.9.9/dns-query#🚀 节点选择'\n    - 'https://doh.opendns.com/dns-query#🚀 节点选择'" in BASE
-    # Keep overseas AI DNS out of domestic resolvers and route via general node selector.
-    # AI *website* traffic still routes independently via 💬 Ai平台.
+    # The global fallback is kept intact for cases needing real overseas IPs.
+    # No per-AI-domain proxied DNS override should be reintroduced.
     assert "https://9.9.9.9/dns-query#💬 Ai平台" not in dns_config
     assert "https://doh.opendns.com/dns-query#💬 Ai平台" not in dns_config
-    for rule in proxy_domains:
-        kind, domain = rule.split(",", 1)
-        key = f"+.{domain}" if kind == "DOMAIN-SUFFIX" else domain
-        policy_lines = dns_config.splitlines()
-        idx = policy_lines.index(f"    '{key}':")
-        values = []
-        for line in policy_lines[idx + 1:]:
-            if line.startswith("    ") and not line.startswith("      "):
-                break
-            if line.startswith("      - "):
-                values.append(line.strip())
-        assert values == [
-            "- 'https://9.9.9.9/dns-query#🚀 节点选择'",
-            "- 'https://doh.opendns.com/dns-query#🚀 节点选择'",
-        ], f"Wrong overseas AI DNS policy for {key}: {values}"
     # OpenCode remains a deliberately tested exception using direct Chinese DNS.
     assert "'+.opencode.ai':\n      - 'https://dns.alidns.com/dns-query'\n      - 'https://doh.pub/dns-query'" in BASE
     assert len(process_names) == 74, f"Unexpected process count: {len(process_names)}"
