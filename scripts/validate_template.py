@@ -54,7 +54,7 @@ def main() -> None:
     assert "  enable: true" in BASE and "  enhanced-mode: fake-ip" in BASE
     assert "proxy-server-nameserver:" in BASE and "direct-nameserver:" in BASE
     # Corporate split-horizon DNS must never silently switch back to system/public DNS.
-    for domain in ("tech.bitauto.com", "yiche.com", "bitauto.com", "bitautotech.com"):
+    for domain in ("tech.bitauto.com", "yiche.com", "bitauto.com", "bitautotech.com", "inneryiche.com"):
         dns_entry = "    '+." + domain + "':\n      - 192.168.70.49\n      - 192.168.70.1\n"
         assert dns_entry in BASE, f"Wrong corporate DNS policy: {domain}"
         assert f"    - '+.{domain}'" in BASE, f"Missing fake-IP exclusion: {domain}"

@@ -67,6 +67,9 @@ dns:
     '+.bitautotech.com':
       - 192.168.70.49
       - 192.168.70.1
+    '+.inneryiche.com':
+      - 192.168.70.49
+      - 192.168.70.1
     # OpenCode DNS-only troubleshooting: do not tunnel DoH through EdgeTunnel.
     # DNS queries use reachable domestic HTTPS resolvers; website HTTPS traffic
     # still routes via the high-priority DOMAIN-SUFFIX rule to 💻 OpenCode.
@@ -171,6 +174,7 @@ dns:
     - '+.yiche.com'
     - '+.bitauto.com'
     - '+.bitautotech.com'
+    - '+.inneryiche.com'
 
 # 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）/ script (脚本)
 # mode: rule
@@ -1123,6 +1127,7 @@ rules:
   - 'DOMAIN-SUFFIX,yiche.com,DIRECT'
   - 'DOMAIN-SUFFIX,bitauto.com,DIRECT'
   - 'DOMAIN-SUFFIX,bitautotech.com,DIRECT'
+  - 'DOMAIN-SUFFIX,inneryiche.com,DIRECT'
 
   # App process rules are injected by Subconverter from rules/app-*.list.
   # They appear after these fixed exceptions and before the AI / ACL4SSR domain lists.
