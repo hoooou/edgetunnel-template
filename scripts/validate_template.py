@@ -86,7 +86,7 @@ def main() -> None:
         "rules/explicit-direct.list", "rules/explicit-proxy.list",
         "rules/app-proxy-domains.list", "rules/app-direct-domains.list",
         "rules/overseas-services.list", "rules/domestic-services.list",
-        "Clash/ProxyGFWlist.list", "Clash/ChinaDomain.list", "[]FINAL",
+        "Clash/ProxyLite.list", "Clash/ChinaDomain.list", "[]FINAL",
     ])
     assert "DOMAIN-SUFFIX,microsoft.com" in (ROOT / "rules/explicit-direct.list").read_text(encoding="utf-8")
     assert "DOMAIN-SUFFIX,onedrive.com" in (ROOT / "rules/explicit-direct.list").read_text(encoding="utf-8")
@@ -101,9 +101,12 @@ def main() -> None:
         "rules/ai-direct.list",
         "rules/ai-proxy.list",
         "Clash/Ruleset/AI.list",
-        "Clash/ProxyGFWlist.list",
+        "Clash/ProxyLite.list",
         "[]FINAL",
     ])
+    # Lightweight mobile ruleset: never pull in full 7K-entry GFW domain list.
+    assert "Clash/ProxyLite.list" in INI, "Missing lightweight ACL4SSR proxy rules"
+    assert "Clash/ProxyGFWlist.list" not in INI, "Full ProxyGFWlist unexpectedly enabled"
     assert "overwrite_original_rules=false" in INI
     assert "clash_rule_base=https://raw.githubusercontent.com/hoooou/edgetunnel-template/main/clash-base.yaml" in INI
     assert "custom_proxy_group=💻 OpenCode" in INI
