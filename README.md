@@ -147,7 +147,9 @@ The base profile now enables `dns.enhanced-mode: fake-ip` and split DNS, based o
 
 **DNS policy correction 2026-10-14:** Previously, 71 overseas AI DNS rules used Quad9/OpenDNS via `🚀 节点选择` to reduce DNS poisoning risk. They were later removed as a **separate mobile stability test** after `GEOIP,CN,no-resolve`, to avoid per-domain forced DNS upstreams and rely on domain routing where possible. This does not remove or repair the global overseas DNS fallback. `opencode.ai` remains the one confirmed-working domestic DoH exception. Keep in mind that local DNS for foreign services can still be polluted, and Cloudflare Worker TCP resets remain independent issues.
 
-**2026-10-14 AI DNS policy removal A/B test:** Remove only 71 `nameserver-policy` overrides, not the 71 `ai-proxy.list` domain routing entries. The resulting template keeps the same DNS `fallback` and `GEOIP,CN,no-resolve`. Regenerate the EdgeTunnel subscription and verify in the generated Mihomo YAML that dedicated keys such as `'+.chatgpt.com'` are absent from `nameserver-policy`, while ChatGPT is still routed to `💬 Ai平台`. Observe both the foreign DoH timeout logs and any incorrect IP/DNS answers; if they persist, address general fallback/edge-node reachability in a separate change.\n\n**Compatibility note:** This is a Mihomo-specific DNS enhancement. A Shadowrocket import may ignore or reinterpret parts of the DNS and process configuration; no live iOS compatibility claim is made. Likewise, Subconverter must inline the three new Surge-format `.list` files during conversion. Inspect the resulting YAML and runtime logs after regenerating the EdgeTunnel subscription. A static YAML refresh alone does not re-run Subconverter.
+**2026-10-14 AI DNS policy removal A/B test:** Remove only 71 `nameserver-policy` overrides, not the 71 `ai-proxy.list` domain routing entries. The resulting template keeps the same DNS `fallback` and `GEOIP,CN,no-resolve`. Regenerate the EdgeTunnel subscription and verify in the generated Mihomo YAML that dedicated keys such as `'+.chatgpt.com'` are absent from `nameserver-policy`, while ChatGPT is still routed to `💬 Ai平台`. Observe both the foreign DoH timeout logs and any incorrect IP/DNS answers; if they persist, address general fallback/edge-node reachability in a separate change.
+
+**Compatibility note:** This is a Mihomo-specific DNS enhancement. A Shadowrocket import may ignore or reinterpret parts of the DNS and process configuration; no live iOS compatibility claim is made. Likewise, Subconverter must inline the three new Surge-format `.list` files during conversion. Inspect the resulting YAML and runtime logs after regenerating the EdgeTunnel subscription. A static YAML refresh alone does not re-run Subconverter.
 
 Run local static tests from the repository root:
 
@@ -156,3 +158,14 @@ python3 scripts/validate_template.py
 ```
 
 Static tests do not confirm live EdgeTunnel VLESS connectivity, actual AI exit country, certificate trust, DNS response behavior or Android/Shadowrocket app capture. The P2 speed-test/proxy grouping strategy is intentionally unchanged.
+
+## 2026-10-14 (later): drop tunnel DoH fallback, restore GEOIP resolve, close LAN proxy
+
+Supersedes the `GEOIP,CN,no-resolve` A/B test above. Tested with mihomo v1.19.32 against the real generated subscription.
+
+- `dns.fallback` / `fallback-filter` removed. With fake-ip, a proxied domain is resolved at the remote end; the local answer only feeds IP rules. A polluted answer is a non-CN IP and still lands in the proxy group, so the fallback never changed routing; it only made lookups wait on DoH through the selected EdgeTunnel node.
+- `GEOIP,CN` resolves again. With `no-resolve`, unlisted domestic sites (tested: lianjia.com, lagou.com, nowcoder.com) fell to `🐟 漏网之鱼` and went out through the US node. With resolve + domestic-only DoH they match `GeoIP(cn)` and go direct, and no lookup touches the tunnel.
+- The `UDP + GEOIP,CN` rule resolves too: with the old fallback, every rejected overseas QUIC packet (e.g. YouTube) first triggered tunnel DoH. Without fallback this costs one domestic DoH lookup.
+- Kept from the earlier commits: ProxyLite instead of ProxyGFWlist, the 71 overseas AI `nameserver-policy` removals.
+- `allow-lan: false`, `bind-address: "127.0.0.1"`: the template has no `authentication`, so LAN mode exposed an open proxy on 7890/7891 to the whole Wi-Fi.
+- `scripts/validate_template.py`: a local `entries` variable shadowed the `entries()` function, so the script always crashed with UnboundLocalError before any check ran. Renamed; added checks for the above.

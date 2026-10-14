@@ -15,13 +15,15 @@ socks-port: 7891
 # redir-port: 7892
 
 # 允许局域网的连接（可用来共享代理）
-allow-lan: true
+# 关闭：订阅模板没有设置 authentication，开着时同一 Wi-Fi 下任何设备都能用本机 7890 当代理。
+# 确需共享给其他设备时，在本机客户端里临时打开，并配 authentication 或 lan-allowed-ips。
+allow-lan: false
 
 # 仅在将allow-lan设置为true时适用
 # #"*": 绑定所有IP地址
 # #192.168.122.11: 绑定单个IPv4地址
 # #"[aaaa::a8aa:ff:fe09:57d8]": 绑定单个IPv6地址
-bind-address: "*"
+bind-address: "127.0.0.1"
 ipv6: true
 # Client must expose process/package data to match PROCESS-NAME rules.
 find-process-mode: strict
@@ -39,15 +41,9 @@ dns:
   nameserver:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
-  fallback:
-    - 'https://9.9.9.9/dns-query#🚀 节点选择'
-    - 'https://doh.opendns.com/dns-query#🚀 节点选择'
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-    ipcidr:
-      - 240.0.0.0/4
-      - 0.0.0.0/32
+  # No general fallback through the tunnel. In fake-ip mode a proxied domain is
+  # resolved by the remote end, so the local answer only feeds IP rules
+  # (GEOIP,CN). A polluted answer is a non-CN IP and still ends up proxied.
   proxy-server-nameserver:
     - 223.5.5.5
     - 119.29.29.29

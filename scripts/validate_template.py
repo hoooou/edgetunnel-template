@@ -75,10 +75,10 @@ def main() -> None:
         ("rules/domestic-services.list", "DIRECT", 42),
     ]
     for path, policy, count in restored:
-        entries = [x for x in (ROOT / path).read_text(encoding="utf-8").splitlines()
-                   if x.startswith(("DOMAIN,", "DOMAIN-SUFFIX,"))]
-        assert len(entries) == count, f"{path} count changed; review reference my_yml"
-        assert len(entries) == len(set(entries)), f"{path} duplicate domain rules"
+        rows = [x for x in (ROOT / path).read_text(encoding="utf-8").splitlines()
+                if x.startswith(("DOMAIN,", "DOMAIN-SUFFIX,"))]
+        assert len(rows) == count, f"{path} count changed; review reference my_yml"
+        assert len(rows) == len(set(rows)), f"{path} duplicate domain rules"
         assert f"ruleset={policy},https://raw.githubusercontent.com/hoooou/edgetunnel-template/main/{path}" in INI
     required_order(INI, [
         "rules/ai-direct.list", "rules/ai-proxy.list",
@@ -107,9 +107,11 @@ def main() -> None:
     # Lightweight mobile ruleset: never pull in full 7K-entry GFW domain list.
     assert "Clash/ProxyLite.list" in INI, "Missing lightweight ACL4SSR proxy rules"
     assert "Clash/ProxyGFWlist.list" not in INI, "Full ProxyGFWlist unexpectedly enabled"
-    # GEOIP must not trigger overseas DNS just to classify an unmatched domain.
-    assert "ruleset=🎯 全球直连,[]GEOIP,CN,no-resolve" in INI
-    assert "ruleset=🎯 全球直连,[]GEOIP,CN\n" not in INI
+    # GEOIP,CN must resolve: unlisted domestic sites (lianjia/lagou/nowcoder...)
+    # otherwise fall to 漏网之鱼 and go through the tunnel. DNS here is domestic
+    # DoH only (no tunnel fallback), so resolving is cheap.
+    assert "ruleset=🎯 全球直连,[]GEOIP,CN\n" in INI
+    assert "[]GEOIP,CN,no-resolve" not in INI
     assert "ruleset=🐟 漏网之鱼,[]FINAL" in INI
     assert "overwrite_original_rules=false" in INI
     assert "clash_rule_base=https://raw.githubusercontent.com/hoooou/edgetunnel-template/main/clash-base.yaml" in INI
@@ -158,8 +160,10 @@ def main() -> None:
     dns_config = BASE.split("dns:\n", 1)[1].split("  fake-ip-filter:", 1)[0]
     assert "https://1.1.1.1/dns-query#" not in dns_config
     assert "https://8.8.8.8/dns-query#" not in dns_config
-    assert "  fallback:\n    - 'https://9.9.9.9/dns-query#🚀 节点选择'\n    - 'https://doh.opendns.com/dns-query#🚀 节点选择'" in BASE
-    # The global fallback is kept intact for cases needing real overseas IPs.
+    # General fallback through the tunnel was removed; keep it from coming back.
+    assert "\n  fallback:" not in dns_config, "Tunnel DoH fallback must stay removed"
+    assert "\n  fallback-filter:" not in dns_config
+    assert "\nallow-lan: false\n" in BASE, "allow-lan must stay off"
     # No per-AI-domain proxied DNS override should be reintroduced.
     assert "https://9.9.9.9/dns-query#💬 Ai平台" not in dns_config
     assert "https://doh.opendns.com/dns-query#💬 Ai平台" not in dns_config
