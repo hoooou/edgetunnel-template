@@ -107,6 +107,10 @@ def main() -> None:
     # Lightweight mobile ruleset: never pull in full 7K-entry GFW domain list.
     assert "Clash/ProxyLite.list" in INI, "Missing lightweight ACL4SSR proxy rules"
     assert "Clash/ProxyGFWlist.list" not in INI, "Full ProxyGFWlist unexpectedly enabled"
+    # GEOIP must not trigger overseas DNS just to classify an unmatched domain.
+    assert "ruleset=🎯 全球直连,[]GEOIP,CN,no-resolve" in INI
+    assert "ruleset=🎯 全球直连,[]GEOIP,CN\n" not in INI
+    assert "ruleset=🐟 漏网之鱼,[]FINAL" in INI
     assert "overwrite_original_rules=false" in INI
     assert "clash_rule_base=https://raw.githubusercontent.com/hoooou/edgetunnel-template/main/clash-base.yaml" in INI
     assert "custom_proxy_group=💻 OpenCode" in INI
