@@ -24,7 +24,7 @@ The template uses ACL4SSR's lightweight `ProxyLite.list` for `🚀 节点选择`
 
 ## Mobile DNS-resolution A/B test (2026-10-14)
 
-The final country-IP fallback has been changed from `ruleset=🎯 全球直连,[]GEOIP,CN` to `ruleset=🎯 全球直连,[]GEOIP,CN,no-resolve`. This prevents the country-IP match itself from initiating a domain DNS lookup solely to classify an unknown hostname. Existing resolved-IP traffic can still match CN; unmatched domain traffic can reach `🐟 漏网之鱼` (defaults to `🚀 节点选择`), including some Chinese domains not in the earlier direct lists. The 71 dedicated overseas AI DNS policies were **subsequently removed** in a separate test; Quad9/OpenDNS fallback, the `opencode.ai` exception, corporate split DNS, UDP and proxy groups remain unchanged. This is **not** a fix for foreign DoH connection timeouts or Cloudflare entrance TCP resets.
+The final country-IP fallback has been changed from `ruleset=🎯 全球直连,[]GEOIP,CN` to `ruleset=🎯 全球直连,[]GEOIP,CN,no-resolve`. This prevents the country-IP match itself from initiating a domain DNS lookup solely to classify an unknown hostname. Existing resolved-IP traffic can still match CN; unmatched domain traffic can reach `🐟 漏网之鱼` (defaults to `🚀 节点选择`), including some Chinese domains not in the earlier direct lists. The 71 dedicated overseas AI DNS policies were **subsequently removed** in a separate test; Quad9/OpenDNS fallback, the `opencode.ai` exception, intranet split DNS, UDP and proxy groups remain unchanged. This is **not** a fix for foreign DoH connection timeouts or Cloudflare entrance TCP resets.
 
 For the A/B test, have EdgeTunnel/Subconverter regenerate the subscription, refresh/restart FlClash on Android, and verify the emitted YAML includes `GEOIP,CN,🎯 全球直连,no-resolve`. Then compare the same selected node over the same mobile network against the prior profile. To rollback only this experiment, restore `ruleset=🎯 全球直连,[]GEOIP,CN` in the `.ini`.
 
@@ -35,7 +35,7 @@ For the A/B test, have EdgeTunnel/Subconverter regenerate the subscription, refr
 3. All remaining UDP is rejected. This prevents an unsupported EdgeTunnel VLESS UDP flow from falling through to `DIRECT`.
 4. `ip.me` explicitly goes to `🚀 节点选择`, even when `🐟 漏网之鱼` is configured as direct.
 5. `opencode.ai` goes to the independent `💻 OpenCode` group.
-6. `tech.bitauto.com`, `yiche.com`, `bitauto.com`, and `bitautotech.com` go direct.
+6. Private intranet domains listed in `clash-base.yaml` go direct.
 7. `opencode.ai` remains in `💻 OpenCode` **before** app process matching; the OpenCode process is not pinned.
 8. Dedicated domestic AI Android apps (DeepSeek/Kimi/Doubao/Zhipu/Yuanbao) and domestic AI website/API domains use `DIRECT`.
 9. Dedicated overseas AI apps (ChatGPT/Claude/Gemini) and overseas AI website/API domains use `💬 Ai平台`.
@@ -49,10 +49,10 @@ For the A/B test, have EdgeTunnel/Subconverter regenerate the subscription, refr
 3. Edit `ACL4SSR_Online_Mini_Ai_Merged.ini` and replace:
 
    ```text
-   hoooou
+   <your-github-user>
    ```
 
-   If the repository is not named `edgetunnel-template`, replace that segment too.
+   with your GitHub user name. If the repository is not named `edgetunnel-template`, replace that segment too.
 4. Confirm both Raw URLs can be opened without authentication.
 
 ## EdgeTunnel backend
@@ -60,7 +60,7 @@ For the A/B test, have EdgeTunnel/Subconverter regenerate the subscription, refr
 Set the custom subscription template URL to:
 
 ```text
-https://raw.githubusercontent.com/hoooou/edgetunnel-template/main/ACL4SSR_Online_Mini_Ai_Merged.ini
+https://raw.githubusercontent.com/<your-github-user>/edgetunnel-template/main/ACL4SSR_Online_Mini_Ai_Merged.ini
 ```
 
 Keep these unchecked for the current EdgeTunnel VLESS deployment:
@@ -85,13 +85,13 @@ Default behavior: `💬 Ai平台`, `💻 OpenCode`, and `🐟 漏网之鱼` sele
 
 ## Backfilled application and service rules
 
-The source `hoooou/my_yml/优选配置.yaml` includes four explicit domain lists (43 domestic-app, 34 overseas-app, 42 domestic-service, and 84 overseas-service entries) and 24 standalone exceptions. These are now represented in six Surge-style rule lists loaded by Subconverter, after high-priority OpenCode/AI rules and before generic ACL4SSR media/GFW/China lists. Existing app process routing remains ahead of the domain lists.
+The source profile includes four explicit domain lists (43 domestic-app, 34 overseas-app, 42 domestic-service, and 84 overseas-service entries) and 24 standalone exceptions. These are now represented in six Surge-style rule lists loaded by Subconverter, after high-priority OpenCode/AI rules and before generic ACL4SSR media/GFW/China lists. Existing app process routing remains ahead of the domain lists.
 
 - Restored entries: **43 + 34 + 42 + 83** application/service domain rules, **17** explicit direct exceptions and **5** explicit proxy exceptions.
 - `googleapis.com` is deliberately not blanket-proxied, as it is a shared service provider domain. Dedicated Google AI API rules stay under `💬 Ai平台`; `googleapis.cn` remains proxied.
-- Two original standalone office domain exceptions, `yiche.com` and `bitautotech.com`, were already in `clash-base.yaml` and are therefore not duplicated in `explicit-direct.list`.
+- Standalone intranet domain exceptions already in `clash-base.yaml` are not duplicated in `explicit-direct.list`.
 - Microsoft and OneDrive retain explicit DIRECT overrides. Copilot and other foreign AI endpoints still follow the earlier `💬 Ai平台` rules.
-- Sources may overlap intentionally; Mihomo uses the first matched rule. No corporate DNS, Fake-IP exceptions, general DNS policy, UDP restrictions, node definitions or select-group defaults were modified.
+- Sources may overlap intentionally; Mihomo uses the first matched rule. No intranet DNS, Fake-IP exceptions, general DNS policy, UDP restrictions, node definitions or select-group defaults were modified.
 - Subconverter must actually fetch these six ruleset files when **regenerating** the full subscription. Merely refreshing a cached/static generated YAML may not include them. The repository static checks cannot prove conversion or real FlClash/Shadowrocket behavior.
 
 ## Rule ordering and client update
@@ -115,7 +115,7 @@ The current local rules enhancement still contains these two rules:
 - 'DOMAIN-SUFFIX,opencode.ai,DIRECT'
 ```
 
-They would override the shared template's `💬 Ai平台` and `💻 OpenCode` behavior. After switching to the shared template, disable that local rules enhancement or remove those two entries. The company-domain rules are already included in `clash-base.yaml`, so the local enhancement can be disabled entirely.
+They would override the shared template's `💬 Ai平台` and `💻 OpenCode` behavior. After switching to the shared template, disable that local rules enhancement or remove those two entries. The intranet-domain rules are already included in `clash-base.yaml`, so the local enhancement can be disabled entirely.
 
 ## Expected leading rules
 
@@ -131,13 +131,13 @@ LAN/private rules intentionally precede them.
 
 ## Phase 2: Mihomo DNS (2026-10-13)
 
-The base profile now enables `dns.enhanced-mode: fake-ip` and split DNS, based on the principles in `hoooou/my_yml` including its **company-only DNS exceptions** for use on the corporate network.
+The base profile now enables `dns.enhanced-mode: fake-ip` and split DNS, including split-horizon DNS exceptions for private intranet domains.
 
-- Default DNS and domestic AI policy use Chinese HTTPS DNS (`dns.alidns.com` and `doh.pub`). Corporate split-horizon DNS and its Fake-IP exceptions are unchanged.
+- Default DNS and domestic AI policy use Chinese HTTPS DNS (`dns.alidns.com` and `doh.pub`). Intranet split-horizon DNS and its Fake-IP exceptions are unchanged.
 - **Overseas AI DNS (71 domains):** no dedicated `nameserver-policy` entries. Preserve `fake-ip` and the `💬 Ai平台` routing rules so supported domain-based proxy traffic can proceed without the former forced per-domain DoH override. When a real foreign IP is needed, the **unchanged global DNS** (domestic `nameserver` plus Quad9/OpenDNS `fallback` routed via `🚀 节点选择`) can still be used. This does **not** guarantee immunity to DNS pollution or overseas DoH timeout.
 - Other overseas domains use the same two non-Cloudflare DoH upstreams for fallback HTTPS DNS via `🚀 节点选择` when the geo-IP filter selects fallback. Whether the fallback is selected depends on Mihomo's filter, not a guaranteed ordered failover.
-- Proxy-node hostnames use domestic bootstrap resolvers to prevent a proxy-resolution cycle. Direct-domain resolution uses domestic HTTPS DNS; `direct-nameserver-follow-policy: true` follows explicit AI/company overrides.
-- Office domains (`*.tech.bitauto.com`, `*.yiche.com`, `*.bitauto.com`, `*.bitautotech.com`) bypass fake-IP and are resolved via corporate DNS servers `192.168.70.49` and `192.168.70.1` (as in `hoooou/my_yml`). These names are also explicitly routed `DIRECT`. This requires the company Wi-Fi/LAN or a company VPN with reachability to those DNS servers. Offsite without VPN, these internal sites may fail to resolve, intentionally avoiding the public-DNS result that redirects to a public parent domain.
+- Proxy-node hostnames use domestic bootstrap resolvers to prevent a proxy-resolution cycle. Direct-domain resolution uses domestic HTTPS DNS; `direct-nameserver-follow-policy: true` follows explicit AI/intranet overrides.
+- Private intranet domains bypass fake-IP and are resolved only by the intranet DNS servers configured in `clash-base.yaml`; they are also routed `DIRECT`. Outside that network (and without a VPN reaching those servers) they may fail to resolve, intentionally avoiding a misleading public-DNS answer.
 - DNS AAAA answers are disabled (`dns.ipv6: false`) to reduce IPv6 direct-route surprises; the pre-existing IPv6 LAN/CIDR rules remain. This is not an absolute leak prevention guarantee.
 - Existing EdgeTunnel UDP rules remain **unchanged**. Overseas DoH uses HTTPS over TCP via an existing proxy group; normal overseas UDP stays rejected.
 
