@@ -171,7 +171,8 @@ def main() -> None:
     assert "https://doh.opendns.com/dns-query#💬 Ai平台" not in dns_config
     # OpenCode remains a deliberately tested exception using direct Chinese DNS.
     assert "'+.opencode.ai':\n      - 'https://dns.alidns.com/dns-query'\n      - 'https://doh.pub/dns-query'" in BASE
-    assert len(process_names) == 74, f"Unexpected process count: {len(process_names)}"
+    # 50 direct + 3 Android AI packages + 13 other overseas apps; desktop ChatGPT/Claude are domain-routed.
+    assert len(process_names) == 66, f"Unexpected process count: {len(process_names)}"
     print(f"Static checks passed: {len(process_names)} processes, {len(direct_domains)} domestic AI domains, {len(proxy_domains)} overseas AI domains.")
     print("Not verified: live Subconverter expansion, Mihomo runtime, Shadowrocket import, Android process identity and real DNS behavior.")
 

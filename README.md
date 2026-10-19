@@ -38,7 +38,7 @@ For the A/B test, have EdgeTunnel/Subconverter regenerate the subscription, refr
 6. Private intranet domains listed in `clash-base.yaml` go direct.
 7. `opencode.ai` remains in `💻 OpenCode` **before** app process matching; the OpenCode process is not pinned.
 8. Dedicated domestic AI Android apps (DeepSeek/Kimi/Doubao/Zhipu/Yuanbao) and domestic AI website/API domains use `DIRECT`.
-9. Dedicated overseas AI apps (ChatGPT/Claude/Gemini) and overseas AI website/API domains use `💬 Ai平台`.
+9. Overseas AI website/API domains and the Android packages of ChatGPT/Claude/Gemini use `💬 Ai平台`; desktop ChatGPT/Claude are not process-pinned and follow the same domain rules.
 10. Other domestic and overseas apps follow the reviewed `my_yml` app process catalog, with `find-process-mode: strict` and domain fallbacks.
 11. Multi-model applications (Cursor, OpenCode, Python, Node, browsers) are not pinned to one node group by process; their API domain determines routing.
 
