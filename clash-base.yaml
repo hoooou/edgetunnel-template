@@ -53,7 +53,7 @@ sniffer:
 # HTTPS DNS uses TCP, so it does not violate EdgeTunnel's UDP rejection policy.
 dns:
   enable: true
-  ipv6: false # Do not return unproxied AAAA results; IPv6 LAN rules are preserved separately.
+  ipv6: true # Return AAAA while the local network has a working IPv6 route; set false on IPv4-only networks.
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   default-nameserver:
