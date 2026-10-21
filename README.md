@@ -138,7 +138,7 @@ The base profile now enables `dns.enhanced-mode: fake-ip` and split DNS, includi
 - Other overseas domains use the same two non-Cloudflare DoH upstreams for fallback HTTPS DNS via `🚀 节点选择` when the geo-IP filter selects fallback. Whether the fallback is selected depends on Mihomo's filter, not a guaranteed ordered failover.
 - Proxy-node hostnames use domestic bootstrap resolvers to prevent a proxy-resolution cycle. Direct-domain resolution uses domestic HTTPS DNS; `direct-nameserver-follow-policy: true` follows explicit AI/intranet overrides.
 - Private intranet domains bypass fake-IP and are resolved only by the intranet DNS servers configured in `clash-base.yaml`; they are also routed `DIRECT`. Outside that network (and without a VPN reaching those servers) they may fail to resolve, intentionally avoiding a misleading public-DNS answer.
-- DNS AAAA answers are enabled (`dns.ipv6: true`) so IPv6-capable networks can use native IPv6; on networks without a working IPv6 route this can produce direct-route errors, so switch it back to `false` there. The pre-existing IPv6 LAN/CIDR rules remain; this is not an absolute leak prevention guarantee.
+- DNS AAAA answers are disabled (`dns.ipv6: false`) and public IPv6 is rejected by a rule, so apps fall back to IPv4 instead of hanging on a broken IPv6 route; the private IPv6 LAN/CIDR rules remain. This is not an absolute leak prevention guarantee.
 - Existing EdgeTunnel UDP rules remain **unchanged**. Overseas DoH uses HTTPS over TCP via an existing proxy group; normal overseas UDP stays rejected.
 
 

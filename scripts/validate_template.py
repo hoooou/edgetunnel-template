@@ -45,6 +45,7 @@ def main() -> None:
 
     required_order(BASE, [
         "DOMAIN-SUFFIX,lan,DIRECT",
+        "IP-CIDR6,::/0,REJECT,no-resolve",
         "NETWORK,UDP,REJECT",
         "DOMAIN-SUFFIX,opencode.ai,💻 OpenCode",
         "DOMAIN-SUFFIX,worker.yieti.top,🚀 节点选择",

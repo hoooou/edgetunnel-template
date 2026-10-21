@@ -53,7 +53,7 @@ sniffer:
 # HTTPS DNS uses TCP, so it does not violate EdgeTunnel's UDP rejection policy.
 dns:
   enable: true
-  ipv6: true # Return AAAA while the local network has a working IPv6 route; set false on IPv4-only networks.
+  ipv6: false # No AAAA; public IPv6 is rejected below to force IPv4 on networks without a working IPv6 route.
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   default-nameserver:
@@ -1134,6 +1134,8 @@ rules:
   - 'IP-CIDR6,fc00::/7,DIRECT,no-resolve'
   - 'IP-CIDR6,fe80::/10,DIRECT,no-resolve'
   - 'IP-CIDR6,fd00::/8,DIRECT,no-resolve'
+  # Force IPv4: reject public IPv6 so apps fall back instead of hanging on a broken route.
+  - 'IP-CIDR6,::/0,REJECT,no-resolve'
 
   # Domestic UDP may connect directly; all other UDP is rejected.
   - 'AND,((NETWORK,UDP),(GEOIP,CN)),DIRECT'
