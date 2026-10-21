@@ -48,6 +48,7 @@ def main() -> None:
         "NETWORK,UDP,REJECT",
         "DOMAIN-SUFFIX,opencode.ai,💻 OpenCode",
         "DOMAIN-SUFFIX,worker.yieti.top,🚀 节点选择",
+        "DOMAIN-SUFFIX,vs.yieti.top,🚀 节点选择",
         "DOMAIN-SUFFIX,yieti.top,DIRECT",
         "DOMAIN-SUFFIX,bitautotech.com,DIRECT",
     ])

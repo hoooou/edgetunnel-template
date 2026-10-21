@@ -1144,6 +1144,7 @@ rules:
   - 'DOMAIN-SUFFIX,ip.me,🚀 节点选择'
   - 'DOMAIN-SUFFIX,opencode.ai,💻 OpenCode'
   - 'DOMAIN-SUFFIX,worker.yieti.top,🚀 节点选择'
+  - 'DOMAIN-SUFFIX,vs.yieti.top,🚀 节点选择'
   - 'DOMAIN-SUFFIX,yieti.top,DIRECT'
   - 'DOMAIN-SUFFIX,tech.bitauto.com,DIRECT'
   - 'DOMAIN-SUFFIX,yiche.com,DIRECT'
